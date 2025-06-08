@@ -20,14 +20,14 @@
 #endif
 
 extern "C" {
-SEXP _glmnet_elnet_exp(SEXP kaSEXP, SEXP parmSEXP, SEXP xSEXP, SEXP ySEXP, SEXP wSEXP, SEXP jdSEXP, SEXP vpSEXP, SEXP clSEXP, SEXP neSEXP, SEXP nxSEXP, SEXP nlamSEXP, SEXP flminSEXP, SEXP ulamSEXP, SEXP thrSEXP, SEXP isdSEXP, SEXP intrSEXP, SEXP maxitSEXP, SEXP pbSEXP, SEXP lmuSEXP, SEXP a0SEXP, SEXP caSEXP, SEXP iaSEXP, SEXP ninSEXP, SEXP rsqSEXP, SEXP almSEXP, SEXP nlpSEXP, SEXP jerrSEXP);
-SEXP _glmnet_spelnet_exp(SEXP kaSEXP, SEXP parmSEXP, SEXP xSEXP, SEXP ySEXP, SEXP wSEXP, SEXP jdSEXP, SEXP vpSEXP, SEXP clSEXP, SEXP neSEXP, SEXP nxSEXP, SEXP nlamSEXP, SEXP flminSEXP, SEXP ulamSEXP, SEXP thrSEXP, SEXP isdSEXP, SEXP intrSEXP, SEXP maxitSEXP, SEXP pbSEXP, SEXP lmuSEXP, SEXP a0SEXP, SEXP caSEXP, SEXP iaSEXP, SEXP ninSEXP, SEXP rsqSEXP, SEXP almSEXP, SEXP nlpSEXP, SEXP jerrSEXP);
+SEXP _glmnet_elnet_exp(SEXP kaSEXP, SEXP parmSEXP, SEXP xSEXP, SEXP ySEXP, SEXP wSEXP, SEXP jdSEXP, SEXP vpSEXP, SEXP mpSEXP, SEXP clSEXP, SEXP neSEXP, SEXP nxSEXP, SEXP nlamSEXP, SEXP flminSEXP, SEXP ulamSEXP, SEXP thrSEXP, SEXP isdSEXP, SEXP intrSEXP, SEXP maxitSEXP, SEXP pbSEXP, SEXP lmuSEXP, SEXP a0SEXP, SEXP caSEXP, SEXP iaSEXP, SEXP ninSEXP, SEXP rsqSEXP, SEXP almSEXP, SEXP nlpSEXP, SEXP jerrSEXP);
+SEXP _glmnet_spelnet_exp(SEXP kaSEXP, SEXP parmSEXP, SEXP xSEXP, SEXP ySEXP, SEXP wSEXP, SEXP jdSEXP, SEXP vpSEXP, SEXP mpSEXP, SEXP clSEXP, SEXP neSEXP, SEXP nxSEXP, SEXP nlamSEXP, SEXP flminSEXP, SEXP ulamSEXP, SEXP thrSEXP, SEXP isdSEXP, SEXP intrSEXP, SEXP maxitSEXP, SEXP pbSEXP, SEXP lmuSEXP, SEXP a0SEXP, SEXP caSEXP, SEXP iaSEXP, SEXP ninSEXP, SEXP rsqSEXP, SEXP almSEXP, SEXP nlpSEXP, SEXP jerrSEXP);
 SEXP _glmnet_lognet_exp(SEXP parmSEXP, SEXP xSEXP, SEXP ySEXP, SEXP gSEXP, SEXP jdSEXP, SEXP vpSEXP, SEXP mpSEXP, SEXP clSEXP, SEXP neSEXP, SEXP nxSEXP, SEXP nlamSEXP, SEXP flminSEXP, SEXP ulamSEXP, SEXP thrSEXP, SEXP isdSEXP, SEXP intrSEXP, SEXP maxitSEXP, SEXP koptSEXP, SEXP pbSEXP, SEXP lmuSEXP, SEXP a0SEXP, SEXP caSEXP, SEXP iaSEXP, SEXP ninSEXP, SEXP nulldevSEXP, SEXP devSEXP, SEXP almSEXP, SEXP nlpSEXP, SEXP jerrSEXP);
-SEXP _glmnet_splognet_exp(SEXP parmSEXP, SEXP xSEXP, SEXP ySEXP, SEXP gSEXP, SEXP jdSEXP, SEXP vpSEXP, SEXP clSEXP, SEXP neSEXP, SEXP nxSEXP, SEXP nlamSEXP, SEXP flminSEXP, SEXP ulamSEXP, SEXP thrSEXP, SEXP isdSEXP, SEXP intrSEXP, SEXP maxitSEXP, SEXP koptSEXP, SEXP pbSEXP, SEXP lmuSEXP, SEXP a0SEXP, SEXP caSEXP, SEXP iaSEXP, SEXP ninSEXP, SEXP nulldevSEXP, SEXP devSEXP, SEXP almSEXP, SEXP nlpSEXP, SEXP jerrSEXP);
-SEXP _glmnet_fishnet_exp(SEXP parmSEXP, SEXP xSEXP, SEXP ySEXP, SEXP gSEXP, SEXP wSEXP, SEXP jdSEXP, SEXP vpSEXP, SEXP clSEXP, SEXP neSEXP, SEXP nxSEXP, SEXP nlamSEXP, SEXP flminSEXP, SEXP ulamSEXP, SEXP thrSEXP, SEXP isdSEXP, SEXP intrSEXP, SEXP maxitSEXP, SEXP pbSEXP, SEXP lmuSEXP, SEXP a0SEXP, SEXP caSEXP, SEXP iaSEXP, SEXP ninSEXP, SEXP nulldevSEXP, SEXP devSEXP, SEXP almSEXP, SEXP nlpSEXP, SEXP jerrSEXP);
-SEXP _glmnet_spfishnet_exp(SEXP parmSEXP, SEXP xSEXP, SEXP ySEXP, SEXP gSEXP, SEXP wSEXP, SEXP jdSEXP, SEXP vpSEXP, SEXP clSEXP, SEXP neSEXP, SEXP nxSEXP, SEXP nlamSEXP, SEXP flminSEXP, SEXP ulamSEXP, SEXP thrSEXP, SEXP isdSEXP, SEXP intrSEXP, SEXP maxitSEXP, SEXP pbSEXP, SEXP lmuSEXP, SEXP a0SEXP, SEXP caSEXP, SEXP iaSEXP, SEXP ninSEXP, SEXP nulldevSEXP, SEXP devSEXP, SEXP almSEXP, SEXP nlpSEXP, SEXP jerrSEXP);
-SEXP _glmnet_multelnet_exp(SEXP parmSEXP, SEXP xSEXP, SEXP ySEXP, SEXP wSEXP, SEXP jdSEXP, SEXP vpSEXP, SEXP clSEXP, SEXP neSEXP, SEXP nxSEXP, SEXP nlamSEXP, SEXP flminSEXP, SEXP ulamSEXP, SEXP thrSEXP, SEXP isdSEXP, SEXP jsdSEXP, SEXP intrSEXP, SEXP maxitSEXP, SEXP pbSEXP, SEXP lmuSEXP, SEXP a0SEXP, SEXP caSEXP, SEXP iaSEXP, SEXP ninSEXP, SEXP rsqSEXP, SEXP almSEXP, SEXP nlpSEXP, SEXP jerrSEXP);
-SEXP _glmnet_multspelnet_exp(SEXP parmSEXP, SEXP xSEXP, SEXP ySEXP, SEXP wSEXP, SEXP jdSEXP, SEXP vpSEXP, SEXP clSEXP, SEXP neSEXP, SEXP nxSEXP, SEXP nlamSEXP, SEXP flminSEXP, SEXP ulamSEXP, SEXP thrSEXP, SEXP isdSEXP, SEXP jsdSEXP, SEXP intrSEXP, SEXP maxitSEXP, SEXP pbSEXP, SEXP lmuSEXP, SEXP a0SEXP, SEXP caSEXP, SEXP iaSEXP, SEXP ninSEXP, SEXP rsqSEXP, SEXP almSEXP, SEXP nlpSEXP, SEXP jerrSEXP);
+SEXP _glmnet_splognet_exp(SEXP parmSEXP, SEXP xSEXP, SEXP ySEXP, SEXP gSEXP, SEXP jdSEXP, SEXP vpSEXP, SEXP mpSEXP, SEXP clSEXP, SEXP neSEXP, SEXP nxSEXP, SEXP nlamSEXP, SEXP flminSEXP, SEXP ulamSEXP, SEXP thrSEXP, SEXP isdSEXP, SEXP intrSEXP, SEXP maxitSEXP, SEXP koptSEXP, SEXP pbSEXP, SEXP lmuSEXP, SEXP a0SEXP, SEXP caSEXP, SEXP iaSEXP, SEXP ninSEXP, SEXP nulldevSEXP, SEXP devSEXP, SEXP almSEXP, SEXP nlpSEXP, SEXP jerrSEXP);
+SEXP _glmnet_fishnet_exp(SEXP parmSEXP, SEXP xSEXP, SEXP ySEXP, SEXP gSEXP, SEXP wSEXP, SEXP jdSEXP, SEXP vpSEXP, SEXP mpSEXP, SEXP clSEXP, SEXP neSEXP, SEXP nxSEXP, SEXP nlamSEXP, SEXP flminSEXP, SEXP ulamSEXP, SEXP thrSEXP, SEXP isdSEXP, SEXP intrSEXP, SEXP maxitSEXP, SEXP pbSEXP, SEXP lmuSEXP, SEXP a0SEXP, SEXP caSEXP, SEXP iaSEXP, SEXP ninSEXP, SEXP nulldevSEXP, SEXP devSEXP, SEXP almSEXP, SEXP nlpSEXP, SEXP jerrSEXP);
+SEXP _glmnet_spfishnet_exp(SEXP parmSEXP, SEXP xSEXP, SEXP ySEXP, SEXP gSEXP, SEXP wSEXP, SEXP jdSEXP, SEXP vpSEXP, SEXP mpSEXP, SEXP clSEXP, SEXP neSEXP, SEXP nxSEXP, SEXP nlamSEXP, SEXP flminSEXP, SEXP ulamSEXP, SEXP thrSEXP, SEXP isdSEXP, SEXP intrSEXP, SEXP maxitSEXP, SEXP pbSEXP, SEXP lmuSEXP, SEXP a0SEXP, SEXP caSEXP, SEXP iaSEXP, SEXP ninSEXP, SEXP nulldevSEXP, SEXP devSEXP, SEXP almSEXP, SEXP nlpSEXP, SEXP jerrSEXP);
+SEXP _glmnet_multelnet_exp(SEXP parmSEXP, SEXP xSEXP, SEXP ySEXP, SEXP wSEXP, SEXP jdSEXP, SEXP vpSEXP, SEXP mpSEXP, SEXP clSEXP, SEXP neSEXP, SEXP nxSEXP, SEXP nlamSEXP, SEXP flminSEXP, SEXP ulamSEXP, SEXP thrSEXP, SEXP isdSEXP, SEXP jsdSEXP, SEXP intrSEXP, SEXP maxitSEXP, SEXP pbSEXP, SEXP lmuSEXP, SEXP a0SEXP, SEXP caSEXP, SEXP iaSEXP, SEXP ninSEXP, SEXP rsqSEXP, SEXP almSEXP, SEXP nlpSEXP, SEXP jerrSEXP);
+SEXP _glmnet_multspelnet_exp(SEXP parmSEXP, SEXP xSEXP, SEXP ySEXP, SEXP wSEXP, SEXP jdSEXP, SEXP vpSEXP, SEXP mpSEXP, SEXP clSEXP, SEXP neSEXP, SEXP nxSEXP, SEXP nlamSEXP, SEXP flminSEXP, SEXP ulamSEXP, SEXP thrSEXP, SEXP isdSEXP, SEXP jsdSEXP, SEXP intrSEXP, SEXP maxitSEXP, SEXP pbSEXP, SEXP lmuSEXP, SEXP a0SEXP, SEXP caSEXP, SEXP iaSEXP, SEXP ninSEXP, SEXP rsqSEXP, SEXP almSEXP, SEXP nlpSEXP, SEXP jerrSEXP);
 SEXP _glmnet_get_int_parms(SEXP smlSEXP, SEXP epsSEXP, SEXP bigSEXP, SEXP mnlamSEXP, SEXP rsqmaxSEXP, SEXP pminSEXP, SEXP exmxSEXP, SEXP itraceSEXP);
 SEXP _glmnet_get_int_parms2(SEXP epsnrSEXP, SEXP mxitnrSEXP);
 SEXP _glmnet_chg_fract_dev(SEXP argSEXP);
@@ -57,6 +57,7 @@ void F77_SUB(coxnet)(
 		     double *w,
 		     int *jd,
 		     double *vp,
+		     double *mp,
 		     double *cl,
 		     int *ne,
 		     int *nx,
@@ -93,14 +94,14 @@ void F77_SUB(loglike)(
 } // end extern "C"
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_glmnet_elnet_exp", (DL_FUNC) &_glmnet_elnet_exp, 27},
-    {"_glmnet_spelnet_exp", (DL_FUNC) &_glmnet_spelnet_exp, 27},
+    {"_glmnet_elnet_exp", (DL_FUNC) &_glmnet_elnet_exp, 28},
+    {"_glmnet_spelnet_exp", (DL_FUNC) &_glmnet_spelnet_exp, 28},
     {"_glmnet_lognet_exp", (DL_FUNC) &_glmnet_lognet_exp, 29},
-    {"_glmnet_splognet_exp", (DL_FUNC) &_glmnet_splognet_exp, 28},
-    {"_glmnet_fishnet_exp", (DL_FUNC) &_glmnet_fishnet_exp, 28},
-    {"_glmnet_spfishnet_exp", (DL_FUNC) &_glmnet_spfishnet_exp, 28},
-    {"_glmnet_multelnet_exp", (DL_FUNC) &_glmnet_multelnet_exp, 27},
-    {"_glmnet_multspelnet_exp", (DL_FUNC) &_glmnet_multspelnet_exp, 27},
+    {"_glmnet_splognet_exp", (DL_FUNC) &_glmnet_splognet_exp, 29},
+    {"_glmnet_fishnet_exp", (DL_FUNC) &_glmnet_fishnet_exp, 29},
+    {"_glmnet_spfishnet_exp", (DL_FUNC) &_glmnet_spfishnet_exp, 29},
+    {"_glmnet_multelnet_exp", (DL_FUNC) &_glmnet_multelnet_exp, 28},
+    {"_glmnet_multspelnet_exp", (DL_FUNC) &_glmnet_multspelnet_exp, 28},
     {"_glmnet_get_int_parms", (DL_FUNC) &_glmnet_get_int_parms, 8},
     {"_glmnet_get_int_parms2", (DL_FUNC) &_glmnet_get_int_parms2, 2},
     {"_glmnet_chg_fract_dev", (DL_FUNC) &_glmnet_chg_fract_dev, 1},
@@ -133,6 +134,7 @@ static R_NativePrimitiveArgType coxnet_t[] = {
   REALSXP,
   REALSXP,
   INTSXP,
+  REALSXP,
   REALSXP,
   REALSXP,
   INTSXP,
