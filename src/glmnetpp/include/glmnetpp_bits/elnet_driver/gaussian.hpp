@@ -31,6 +31,7 @@ struct FitPathGaussian
             , class WType
             , class JUType
             , class VQType
+            , class MQType
             , class XMType
             , class XSType
             , class XVType
@@ -55,6 +56,7 @@ struct FitPathGaussian
             const WType& w,
             const JUType& ju,
             const VQType& vq,
+            const MQType& mq,
             const XMType&,
             const XSType&,
             const XVType& xv,
@@ -88,14 +90,14 @@ struct FitPathGaussian
         if (!ka) {
             ElnetPath<glm, mode_t::cov> elnet_path;
             elnet_path.fit(
-                    parm, ju, vq, cl, g, ne, nx, x, nlam, flmin, vlam, thr, maxit, xv,
+                    parm, ju, vq, mq, cl, g, ne, nx, x, nlam, flmin, vlam, thr, maxit, xv,
                     lmu, ca, ia, nin, rsq, alm, nlp, jerr, setpb_f, int_param);
         } 
         // naive method
         else {
             ElnetPath<glm, mode_t::naive> elnet_path;
             elnet_path.fit(
-                    parm, ju, vq, cl, y, ne, nx, x, nlam, flmin, vlam, thr, maxit, xv,
+                    parm, ju, vq, mq, cl, y, ne, nx, x, nlam, flmin, vlam, thr, maxit, xv,
                     lmu, ca, ia, nin, rsq, alm, nlp, jerr, setpb_f, int_param);
         }
     }
@@ -114,6 +116,7 @@ struct FitPathGaussian<false, false>
             , class WType
             , class JUType
             , class VQType
+            , class MQType
             , class XMType
             , class XSType
             , class XVType
@@ -138,6 +141,7 @@ struct FitPathGaussian<false, false>
             const WType& w,
             const JUType& ju,
             const VQType& vq,
+            const MQType% mq,
             const XMType& xm,
             const XSType& xs,
             const XVType& xv,
@@ -171,14 +175,14 @@ struct FitPathGaussian<false, false>
         if (!ka) {
             SpElnetPath<glm, mode_t::cov> elnet_path;
             elnet_path.fit(
-                    parm, ju, vq, cl, g, w, ne, nx, x, nlam, flmin, vlam, thr, maxit, xm, xs, xv,
+                    parm, ju, vq, mq, cl, g, w, ne, nx, x, nlam, flmin, vlam, thr, maxit, xm, xs, xv,
                     lmu, ca, ia, nin, rsq, alm, nlp, jerr, setpb_f, int_param);
         } 
         // naive method
         else {
             SpElnetPath<glm, mode_t::naive> elnet_path;
             elnet_path.fit(
-                    parm, ju, vq, cl, y, w, ne, nx, x, nlam, flmin, vlam, thr, maxit, xm, xs, xv,
+                    parm, ju, vq, mq, cl, y, w, ne, nx, x, nlam, flmin, vlam, thr, maxit, xm, xs, xv,
                     lmu, ca, ia, nin, rsq, alm, nlp, jerr, setpb_f, int_param);
         }
     }
@@ -194,6 +198,7 @@ struct FitPathGaussian<true, true>
     template <class ValueType
             , class JUType
             , class VQType
+            , class MQType
             , class CLType
             , class YType
             , class WType
@@ -215,6 +220,7 @@ struct FitPathGaussian<true, true>
             ValueType parm,
             const JUType& ju,
             const VQType& vq,
+            const MQType& mq,
             const CLType& cl,
             YType& y,
             const WType&,
@@ -248,7 +254,7 @@ struct FitPathGaussian<true, true>
 
         ElnetPath<glm, mode_t::multi> elnet_path;
         elnet_path.fit(
-                parm, ju, vq, cl, y, ne, nx, x, nlam, flmin, vlam, thr, maxit, xv,
+                parm, ju, vq, mq, cl, y, ne, nx, x, nlam, flmin, vlam, thr, maxit, xv,
                 ys0, lmu, ca, ia, nin, rsq, alm, nlp, jerr, setpb_f, int_param);
     }
 };
@@ -262,6 +268,7 @@ struct FitPathGaussian<false, true>
     template <class ValueType
             , class JUType
             , class VQType
+            , class MQType
             , class CLType
             , class YType
             , class WType
@@ -283,6 +290,7 @@ struct FitPathGaussian<false, true>
             ValueType parm,
             const JUType& ju,
             const VQType& vq,
+            const MQType& mq,
             const CLType& cl,
             YType& y,
             const WType& w,
@@ -316,7 +324,7 @@ struct FitPathGaussian<false, true>
 
         SpElnetPath<glm, mode_t::multi> elnet_path;
         elnet_path.fit(
-                parm, ju, vq, cl, y, w, ne, nx, x, nlam, flmin, vlam, thr, maxit, xm, xs, xv,
+                parm, ju, vq, mq, cl, y, w, ne, nx, x, nlam, flmin, vlam, thr, maxit, xm, xs, xv,
                 ys0, lmu, ca, ia, nin, rsq, alm, nlp, jerr, setpb_f, int_param);
     }
 };
@@ -342,6 +350,7 @@ public:
             , class WType
             , class JDType
             , class VPType
+            , class MPType
             , class CLType
             , class ULamType
             , class IntType
@@ -362,6 +371,7 @@ public:
             WType& w,
             const JDType& jd,
             const VPType& vp,
+            const MPType& mp,
             CLType& cl,
             IntType ne,
             IntType nx,
@@ -401,6 +411,9 @@ public:
             vec_t vq = vp;
             this->normalize_penalty(vq);
 
+            mat_t mq = mp;
+            this->normalize_penalty(mq);
+            
             auto ni = x.cols();
 
             vec_t g;            // only naive version uses it
@@ -437,7 +450,7 @@ public:
             if (flmin >= 1.0) vlam = ulam / ys;
 
             details::FitPathGaussian<do_dense, false>::eval(
-                    ka, parm, x, y, g, w, ju, vq, xm, xs, xv, cl, ne, nx,
+                    ka, parm, x, y, g, w, ju, vq, mq, xm, xs, xv, cl, ne, nx,
                     nlam, flmin, vlam, thr, isd, intr, maxit,
                     lmu, a0, ca, ia, nin, rsq, alm, nlp, jerr, setpb_f, int_param
                     );
@@ -473,6 +486,7 @@ public:
             , class WType
             , class JDType
             , class VPType
+            , class MPType
             , class CLType
             , class IntType
             , class ULamType
@@ -492,6 +506,7 @@ public:
             WType& w,
             const JDType& jd,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             IntType ne,
             IntType nx,
@@ -530,6 +545,9 @@ public:
             vec_t vq = vp;
             this->normalize_penalty(vq);
 
+            mat_t mq = mp;
+            this->normalize_penalty(mq);
+
             auto ni = x.cols();
             auto nr = y.cols();
 
@@ -560,7 +578,7 @@ public:
             }
 
             details::FitPathGaussian<do_dense, true>::eval(
-                    beta, ju, vq, clt, y, w, ne, nx, x,
+                    beta, ju, vq, mq, clt, y, w, ne, nx, x,
                     nlam, flmin, ulam, thr, maxit, xm, xs, xv, 
                     ys0, lmu, a0, ca, ia, nin, rsq, alm, nlp, jerr, setpb_f, int_param);
                 
