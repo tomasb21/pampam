@@ -9,8 +9,8 @@ spelnet_exp <- function(ka, parm, x, y, w, jd, vp, cl, ne, nx, nlam, flmin, ulam
     .Call('_glmnet_spelnet_exp', PACKAGE = 'pampam', ka, parm, x, y, w, jd, vp, cl, ne, nx, nlam, flmin, ulam, thr, isd, intr, maxit, pb, lmu, a0, ca, ia, nin, rsq, alm, nlp, jerr)
 }
 
-lognet_exp <- function(parm, x, y, g, jd, vp, cl, ne, nx, nlam, flmin, ulam, thr, isd, intr, maxit, kopt, pb, lmu, a0, ca, ia, nin, nulldev, dev, alm, nlp, jerr) {
-    .Call('_glmnet_lognet_exp', PACKAGE = 'pampam', parm, x, y, g, jd, vp, cl, ne, nx, nlam, flmin, ulam, thr, isd, intr, maxit, kopt, pb, lmu, a0, ca, ia, nin, nulldev, dev, alm, nlp, jerr)
+lognet_exp <- function(parm, x, y, g, jd, vp, mp, cl, ne, nx, nlam, flmin, ulam, thr, isd, intr, maxit, kopt, pb, lmu, a0, ca, ia, nin, nulldev, dev, alm, nlp, jerr) {
+    .Call('_glmnet_lognet_exp', PACKAGE = 'pampam', parm, x, y, g, jd, vp, mp, cl, ne, nx, nlam, flmin, ulam, thr, isd, intr, maxit, kopt, pb, lmu, a0, ca, ia, nin, nulldev, dev, alm, nlp, jerr)
 }
 
 splognet_exp <- function(parm, x, y, g, jd, vp, cl, ne, nx, nlam, flmin, ulam, thr, isd, intr, maxit, kopt, pb, lmu, a0, ca, ia, nin, nulldev, dev, alm, nlp, jerr) {
@@ -89,8 +89,8 @@ chg_mxitnr <- function(irg) {
     invisible(.Call('_glmnet_chg_mxitnr', PACKAGE = 'pampam', irg))
 }
 
-wls_exp <- function(alm0, almc, alpha, m, no, ni, x, r, xv, v, intr, ju, vp, cl, nx, thr, maxit, a, aint, g, ia, iy, iz, mm, nino, rsqc, nlp, jerr) {
-    .Call('_glmnet_wls_exp', PACKAGE = 'pampam', alm0, almc, alpha, m, no, ni, x, r, xv, v, intr, ju, vp, cl, nx, thr, maxit, a, aint, g, ia, iy, iz, mm, nino, rsqc, nlp, jerr)
+wls_exp <- function(alm0, almc, alpha, m, no, ni, x, r, xv, v, intr, ju, vp, mp, cl, nx, thr, maxit, a, aint, g, ia, iy, iz, mm, nino, rsqc, nlp, jerr) {
+    .Call('_glmnet_wls_exp', PACKAGE = 'pampam', alm0, almc, alpha, m, no, ni, x, r, xv, v, intr, ju, vp, mp, cl, nx, thr, maxit, a, aint, g, ia, iy, iz, mm, nino, rsqc, nlp, jerr)
 }
 
 spwls_exp <- function(alm0, almc, alpha, m, no, ni, x, xm, xs, r, xv, v, intr, ju, vp, cl, nx, thr, maxit, a, aint, g, ia, iy, iz, mm, nino, rsqc, nlp, jerr) {
