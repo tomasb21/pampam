@@ -31,6 +31,7 @@ private:
     template <class ValueType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class GType
             , class WType
@@ -72,6 +73,7 @@ public:
     template <class ValueType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class GType
             , class WType
@@ -92,6 +94,7 @@ public:
         ValueType beta,
         const JUType& ju,
         const VPType& vp,
+        const MPType& mp,
         const CLType& cl,
         GType& g,
         const WType& w,
@@ -121,6 +124,7 @@ public:
             ValueType
             , JUType
             , VPType
+            , MPType
             , CLType
             , GType
             , WType
@@ -140,7 +144,7 @@ public:
             // build sub-pack
             {
                 // build sub-pack
-                {beta, ju, vp, cl, ne, nx, x, nlam, flmin,
+                {beta, ju, vp, mp, cl, ne, nx, x, nlam, flmin,
                  ulam, thr, maxit, lmu, ao, ia, kin, almo, nlp, jerr, setpb_f, int_param},
                 // add new members
                 xv, rsqo
@@ -159,7 +163,7 @@ public:
         return elnet_point_t(
                 ssp.thr, ssp.maxit, ssp.nx, ssp.nlp, ssp.ia, 
                 pack.g, pack.w, ssp.x, 
-                pack.xm, pack.xs, sp.xv, ssp.vp, ssp.cl, ssp.ju);
+                pack.xm, pack.xs, sp.xv, ssp.vp, ssp.mp, ssp.cl, ssp.ju);
     }
 
     template <class FitPackType>
