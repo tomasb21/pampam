@@ -25,6 +25,7 @@ protected:
     template <class ValueType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class IntType
             , class XType
@@ -46,6 +47,7 @@ protected:
             ValueType
             , JUType
             , VPType
+            , MPType
             , CLType
             , IntType
             , XType
