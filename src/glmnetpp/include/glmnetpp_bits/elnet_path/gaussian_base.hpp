@@ -27,6 +27,7 @@ protected:
     template <class ValueType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class IntType
             , class XType
@@ -45,6 +46,7 @@ protected:
             ValueType
             , JUType
             , VPType
+            , MPType
             , CLType
             , IntType
             , XType
@@ -182,6 +184,7 @@ protected:
     template <class ValueType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class YType
             , class IntType
@@ -198,7 +201,7 @@ protected:
     struct FitPack
     {
         using sub_pack_t = typename base_t::template FitPack<
-            ValueType, JUType, VPType, CLType, IntType,
+            ValueType, JUType, VPType, MPType, CLType, IntType,
             XType, ULamType, XVType, AOType, IAType, KinType,
             RSQOType, ALMOType, SetpbFType, IntParamType>;
         using value_t = typename sub_pack_t::value_t;
