@@ -1,4 +1,4 @@
-lognet=function(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,intr,vnames,maxit,kopt,family,pb){
+lognet=function(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,mp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,intr,vnames,maxit,kopt,family,pb){
   nc=dim(y)
   maxit=as.integer(maxit)
   if(is.null(nc)){
