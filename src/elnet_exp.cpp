@@ -128,6 +128,7 @@ List lognet_exp(
     Eigen::MatrixXd g,          // TODO: map? 
     const Eigen::Map<Eigen::VectorXi> jd,
     const Eigen::Map<Eigen::VectorXd> vp,
+    const Eigen::Map<Eigen::MatrixXd> mp,
     Eigen::MatrixXd cl,         // TODO: map?
     int ne,
     int nx,
@@ -156,7 +157,7 @@ List lognet_exp(
     elnet_driver_t driver;
     auto f = [&]() {
         driver.fit(
-                parm, x, y, g, jd, vp, cl, ne, nx, nlam, flmin,
+                parm, x, y, g, jd, vp, mp, cl, ne, nx, nlam, flmin,
                 ulam, thr, isd, intr, maxit, kopt,
                 lmu, a0, ca, ia, nin, nulldev, dev, alm, nlp, jerr,
                 [&](int v) {setpb_cpp(pb, v);}, ::InternalParams());
