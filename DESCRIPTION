@@ -1,8 +1,8 @@
-Package: glmnet
+Package: pam
 Type: Package
-Title: Lasso and Elastic-Net Regularized Generalized Linear Models
-Version: 4.1-9
-Date: 2025-05-16
+Title: Penalized Adaptive Multinomial Regression
+Version: 0.1
+Date: 2025-06-05
 Authors@R: c(person("Jerome", "Friedman", role=c("aut")),
 	     person("Trevor", "Hastie", role=c("aut", "cre"), email = "hastie@stanford.edu"),
 	     person("Rob", "Tibshirani", role=c("aut")),
