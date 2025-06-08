@@ -1393,7 +1393,7 @@ c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))
       dot=s                                                             
       return                                                            
       end                                                               
-      subroutine lognet(parm,no,ni,nc,x,y,g,jd,vp,cl,ne,nx,nlam,flmin,ul
+      subroutine lognet(parm,no,ni,nc,x,y,g,jd,vp,mp,cl,ne,nx,nlam,flmin,ul
      *am,thr,  isd,intr,maxit,kopt,lmu,a0,ca,ia,nin,dev0,dev,alm,nlp,jer
      *r)
       implicit double precision(a-h,o-z)                                
@@ -1431,7 +1431,9 @@ c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))
       return                                                            
 12321 continue                                                          
       vq=max(0d0,vp)                                                    
-      vq=vq*ni/sum(vq)                                                  
+      vq=vq*ni/sum(vq)
+      mq=max(0d0,mp)                                                    
+      mq=mq*ni/sum(mq) 
       do 12331 i=1,no                                                   
       ww(i)=sum(y(i,:))                                                 
       if(ww(i).gt.0.0) y(i,:)=y(i,:)/ww(i)                              
@@ -1447,7 +1449,7 @@ c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))
 12381 continue                                                          
       continue                                                          
 12371 continue                                                          
-      call lognet2n(parm,no,ni,x,y(:,1),g(:,1),ww,ju,vq,cl,ne,nx,nlam,fl
+      call lognet2n(parm,no,ni,x,y(:,1),g(:,1),ww,ju,vq,mq,cl,ne,nx,nlam,fl
      *min,ulam,  thr,isd,intr,maxit,kopt,lmu,a0,ca,ia,nin,dev0,dev,alm,n
      *lp,jerr)
       goto 12341                                                        
@@ -1459,7 +1461,7 @@ c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))
 12421 continue                                                          
       continue                                                          
 12411 continue                                                          
-      call multlognetn(parm,no,ni,nc,x,y,g,ww,ju,vq,cl,ne,nx,nlam,flmin,
+      call multlognetn(parm,no,ni,nc,x,y,g,ww,ju,vq,mq,cl,ne,nx,nlam,flmin,
      *ulam,thr,  intr,maxit,xv,lmu,a0,ca,ia,nin,dev0,dev,alm,nlp,jerr)
       goto 12431                                                        
 12391 continue                                                          
@@ -1470,7 +1472,7 @@ c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))
 12461 continue                                                          
       continue                                                          
 12451 continue                                                          
-      call lognetn(parm,no,ni,nc,x,y,g,ww,ju,vq,cl,ne,nx,nlam,flmin,ulam
+      call lognetn(parm,no,ni,nc,x,y,g,ww,ju,vq,mq,cl,ne,nx,nlam,flmin,ulam
      *,thr,  isd,intr,maxit,kopt,lmu,a0,ca,ia,nin,dev0,dev,alm,nlp,jerr)
 12431 continue                                                          
 12341 continue                                                          
@@ -1564,7 +1566,7 @@ c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))
       continue                                                          
       return                                                            
       end                                                               
-      subroutine lognet2n(parm,no,ni,x,y,g,w,ju,vp,cl,ne,nx,nlam,flmin,u
+      subroutine lognet2n(parm,no,ni,x,y,g,w,ju,vp,mp,cl,ne,nx,nlam,flmin,u
      *lam,shri,  isd,intr,maxit,kopt,lmu,a0,a,m,kin,dev0,dev,alm,nlp,jer
      *r)
       implicit double precision(a-h,o-z)                                
@@ -1915,11 +1917,11 @@ c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))
       deallocate(e,p,w)                                                 
       return                                                            
       end                                                               
-      subroutine lognetn(parm,no,ni,nc,x,y,g,w,ju,vp,cl,ne,nx,nlam,flmin
+      subroutine lognetn(parm,no,ni,nc,x,y,g,w,ju,vp,mpcl,ne,nx,nlam,flmin
      *,ulam,shri,  isd,intr,maxit,kopt,lmu,a0,a,m,kin,dev0,dev,alm,nlp,j
      *err)
       implicit double precision(a-h,o-z)                                
-      double precision x(no,ni),y(no,nc),g(no,nc),w(no),vp(ni),ulam(nlam
+      double precision x(no,ni),y(no,nc),g(no,nc),w(no),vp(ni),mp(ni,nc),ulam(nlam
      *)
       double precision a(nx,nc,nlam),a0(nc,nlam),dev(nlam),alm(nlam),cl(
      *2,ni)
@@ -6122,11 +6124,11 @@ c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))
       deallocate(a,mm,g,iy,gj,gk,del,o)                                 
       return                                                            
       end                                                               
-      subroutine multlognetn(parm,no,ni,nc,x,y,g,w,ju,vp,cl,ne,nx,nlam,f
+      subroutine multlognetn(parm,no,ni,nc,x,y,g,w,ju,vp,mp,cl,ne,nx,nlam,f
      *lmin,ulam,  shri,intr,maxit,xv,lmu,a0,a,m,kin,dev0,dev,alm,nlp,jer
      *r)
       implicit double precision(a-h,o-z)                                
-      double precision x(no,ni),y(no,nc),g(no,nc),w(no),vp(ni),ulam(nlam
+      double precision x(no,ni),y(no,nc),g(no,nc),w(no),vp(ni),mp(ni,nc),ulam(nlam
      *),cl(2,ni)
       double precision a(nx,nc,nlam),a0(nc,nlam),dev(nlam),alm(nlam),xv(
      *ni)
