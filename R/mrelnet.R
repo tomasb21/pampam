@@ -1,4 +1,4 @@
-mrelnet=function(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,jsd,intr,vnames,maxit,pb){
+mrelnet=function(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,mp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,jsd,intr,vnames,maxit,pb){
   maxit=as.integer(maxit)
   weights=as.double(weights)
 ### compute the null deviance
@@ -29,7 +29,7 @@ mrelnet=function(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,cl,ne,nx,nl
   storage.mode(nr)="integer"
 
 fit=if(is.sparse) multspelnet_exp(
-        parm=alpha,x,y,weights,jd,vp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,jsd,intr,maxit,pb,
+        parm=alpha,x,y,weights,jd,vp,mp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,jsd,intr,maxit,pb,
         lmu=integer(1),
         a0=matrix(0.0,nr,nlam),
         ca=double(nx*nlam*nr),
@@ -41,7 +41,7 @@ fit=if(is.sparse) multspelnet_exp(
         jerr=integer(1)
         )
 else multelnet_exp(
-          parm=alpha,x,y,weights,jd,vp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,jsd,intr,maxit,pb,
+          parm=alpha,x,y,weights,jd,vp,mp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,jsd,intr,maxit,pb,
           lmu=integer(1),
           a0=matrix(0.0,nr,nlam),
           ca=double(nx*nlam*nr),
