@@ -28,6 +28,7 @@ struct FitPathBinomial
             , class WType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class IntType
             , class ULamType
@@ -51,6 +52,7 @@ struct FitPathBinomial
             const WType& w,
             const JUType& ju,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             IntType ne,
             IntType nx,
@@ -88,17 +90,17 @@ struct FitPathBinomial
             Eigen::Map<Eigen::MatrixXd> ca_slice(ca.data(), nx, nlam);
             Eigen::Map<Eigen::VectorXd> a0_slice(a0.data(), a0.size());
             ElnetPath<glm, mode_t::two_class> elnet_path;
-            elnet_path.fit(parm,ju,vp,cl,ne,nx,x,y_1,g_1,w,nlam,flmin,ulam,
+            elnet_path.fit(parm,ju,vp,mp,cl,ne,nx,x,y_1,g_1,w,nlam,flmin,ulam,
                  thr,isd,intr,maxit,kopt,lmu,a0_slice,ca_slice,ia,nin,dev0,dev,alm,nlp,jerr,setpb_f, int_param);
         } 
         else if (kopt == 2) {
             ElnetPath<glm, mode_t::multi_class_group> elnet_path;
-            elnet_path.fit(parm,ju,vp,cl,ne,nx,x,y,g,w,nlam,flmin,ulam,
+            elnet_path.fit(parm,ju,vp,mp,cl,ne,nx,x,y,g,w,nlam,flmin,ulam,
                  thr,intr,maxit,xv,lmu,a0,ca,ia,nin,dev0,dev,alm,nlp,jerr,setpb_f, int_param);
         }
         else {
             ElnetPath<glm, mode_t::multi_class> elnet_path;
-            elnet_path.fit(parm,ju,vp,cl,ne,nx,x,y,g,w,nlam,flmin,ulam,thr,
+            elnet_path.fit(parm,ju,vp,mp,cl,ne,nx,x,y,g,w,nlam,flmin,ulam,thr,
                  isd,intr,maxit,kopt,lmu,a0,ca,ia,nin,dev0,dev,alm,nlp,jerr,setpb_f,int_param);
         }
     }
@@ -114,6 +116,7 @@ struct FitPathBinomial<false>
             , class WType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class IntType
             , class ULamType
@@ -137,6 +140,7 @@ struct FitPathBinomial<false>
             const WType& w,
             const JUType& ju,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             IntType ne,
             IntType nx,
@@ -174,17 +178,17 @@ struct FitPathBinomial<false>
             Eigen::Map<Eigen::MatrixXd> ca_slice(ca.data(), nx, nlam);
             Eigen::Map<Eigen::VectorXd> a0_slice(a0.data(), a0.size());
             SpElnetPath<glm, mode_t::two_class> elnet_path;
-            elnet_path.fit(parm,ju,vp,cl,ne,nx,x,y_1,g_1,w,nlam,flmin,ulam,xm,xs,
+            elnet_path.fit(parm,ju,vp,mp,cl,ne,nx,x,y_1,g_1,w,nlam,flmin,ulam,xm,xs,
                  thr,isd,intr,maxit,kopt,lmu,a0_slice,ca_slice,ia,nin,dev0,dev,alm,nlp,jerr,setpb_f, int_param);
         } 
         else if (kopt == 2) {
             SpElnetPath<glm, mode_t::multi_class_group> elnet_path;
-            elnet_path.fit(parm,ju,vp,cl,ne,nx,x,y,g,w,nlam,flmin,ulam,
+            elnet_path.fit(parm,ju,vp,mp,cl,ne,nx,x,y,g,w,nlam,flmin,ulam,
                  thr,intr,maxit,xm,xs,xv,lmu,a0,ca,ia,nin,dev0,dev,alm,nlp,jerr,setpb_f,int_param);
         }
         else {
             SpElnetPath<glm, mode_t::multi_class> elnet_path;
-            elnet_path.fit(parm,ju,vp,cl,ne,nx,x,y,g,w,nlam,flmin,ulam,xm,xs,thr,
+            elnet_path.fit(parm,ju,vp,mp,cl,ne,nx,x,y,g,w,nlam,flmin,ulam,xm,xs,thr,
                  isd,intr,maxit,kopt,lmu,a0,ca,ia,nin,dev0,dev,alm,nlp,jerr,setpb_f,int_param);
         }
     }
@@ -207,6 +211,7 @@ public:
             , class GType
             , class JDType
             , class VPType
+            , class MPType
             , class CLType
             , class ULamType
             , class IntType
@@ -226,6 +231,7 @@ public:
             GType& g,
             const JDType& jd,
             const VPType& vp,
+            const MPType& mp,
             CLType& cl,
             IntType ne,
             IntType nx,
@@ -267,7 +273,9 @@ public:
         try {
             vec_t vq = vp;
             this->normalize_penalty(vq);
-
+            mat_t mq = mp;
+            this->normalize_penalty(mq);
+            
             auto no = x.rows();
             auto ni = x.cols();
             auto nc = g.cols();
@@ -307,7 +315,7 @@ public:
             }
 
             details::FitPathBinomial<do_dense>::eval(
-                    parm, x, y, g, ww, ju, vq, cl, ne, nx,
+                    parm, x, y, g, ww, ju, vq, mq, cl, ne, nx,
                     nlam, flmin, ulam, xm, xs, xv, thr, isd, intr, maxit, kopt,
                     lmu, a0, ca, ia, nin, dev0, dev, alm, nlp, jerr, setpb_f, int_param
                     );
