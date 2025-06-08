@@ -1,4 +1,4 @@
-Package: pam
+Package: pampam
 Type: Package
 Title: Penalized Adaptive Multinomial Regression
 Version: 0.1
