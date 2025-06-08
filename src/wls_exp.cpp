@@ -22,7 +22,6 @@ List wls_exp(
     int intr,
     const Eigen::Map<Eigen::VectorXi> ju,
     const Eigen::Map<Eigen::VectorXd> vp,
-    const Eigen::Map<Eigen::MatrixXd> mp,
     const Eigen::Map<Eigen::MatrixXd> cl,
     int nx,
     double thr,
@@ -50,7 +49,7 @@ List wls_exp(
         internal_t>;
     auto f = [&]() {
         elnet_point_t elnet_point(
-                alm0, almc, alpha, x, r, xv, v, intr, ju, vp, mp,
+                alm0, almc, alpha, x, r, xv, v, intr, ju, vp,
                 cl, nx, thr, maxit, a, aint, g, 
                 ia, iy, iz, mm, nino, rsqc, nlp);
         elnet_point.fit(m, jerr);
