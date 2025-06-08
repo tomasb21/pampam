@@ -30,6 +30,7 @@ private:
     template <class ValueType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class YType
             , class WType
@@ -49,7 +50,7 @@ private:
     struct FitPack
     {
         using sub_pack_t = typename base_t::template FitPack<
-            ValueType, JUType, VPType, CLType, YType, IntType,
+            ValueType, JUType, VPType, MPType, CLType, YType, IntType,
             XType, ULamType, XVType, AOType, IAType, KinType,
             RSQOType, ALMOType, SetpbFType, IntParamType>;
         using value_t = typename sub_pack_t::value_t;
@@ -70,6 +71,7 @@ public:
     template <class ValueType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class YType
             , class WType
@@ -90,6 +92,7 @@ public:
         ValueType beta,
         const JUType& ju,
         const VPType& vp,
+        const MPType& mp,
         const CLType& cl,
         YType& y,
         const WType& w,
@@ -120,6 +123,7 @@ public:
             ValueType
             , JUType
             , VPType
+            , MPType
             , CLType
             , YType
             , WType
@@ -141,7 +145,7 @@ public:
                 // build sub-pack
                 {
                     // build sub-pack
-                    {beta, ju, vp, cl, ne, nx, x, nlam, flmin,
+                    {beta, ju, vp, mp, cl, ne, nx, x, nlam, flmin,
                      ulam, thr, maxit, lmu, ao, ia, kin, almo, nlp, jerr, setpb_f, int_param},
                     // add new members
                     xv, rsqo
@@ -163,7 +167,7 @@ public:
         auto& sssp = ssp.sub_pack;
         return elnet_point_t(
                 sssp.thr, sssp.maxit, sssp.nx, sssp.nlp, sssp.ia, sp.ys0, sp.y, sssp.x, 
-                pack.w, pack.xm, pack.xs, ssp.xv, sssp.vp, sssp.cl, sssp.ju, sssp.int_param);
+                pack.w, pack.xm, pack.xs, ssp.xv, sssp.vp, sssp.mp, sssp.cl, sssp.ju, sssp.int_param);
     }
 
     template <class FitPackType>
