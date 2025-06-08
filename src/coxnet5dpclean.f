@@ -1,5 +1,5 @@
 c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))             
-      subroutine coxnet(parm,no,ni,x,y,d,g,w,jd,vp,cl,ne,nx,nlam,flmin,u
+      subroutine coxnet(parm,no,ni,x,y,d,g,w,jd,vp,mp,cl,ne,nx,nlam,flmin,u
      *lam,thr,  maxit,isd,lmu,ca,ia,nin,dev0,dev,alm,nlp,jerr)
       implicit double precision(a-h,o-z)                                
       double precision x(no,ni),y(no),d(no),g(no),w(no),vp(ni),ulam(nlam
@@ -75,7 +75,7 @@ c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))
       continue                                                          
       return                                                            
       end                                                               
-      subroutine coxnet1(parm,no,ni,x,y,d,g,q,ju,vp,cl,ne,nx,nlam,flmin,
+      subroutine coxnet1(parm,no,ni,x,y,d,g,q,ju,vp,mp,cl,ne,nx,nlam,flmin,
      *ulam,cthri,  isd,maxit,lmu,ao,m,kin,dev0,dev,alm,nlp,jerr)
       implicit double precision(a-h,o-z)                                
       double precision x(no,ni),y(no),q(no),d(no),g(no),vp(ni),ulam(nlam
