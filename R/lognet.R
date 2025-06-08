@@ -61,7 +61,7 @@ lognet=function(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,mp,cl,ne,nx,
     if (nc == 1) offset=as.matrix(offset[,1], ncol=1)
 
     fit=if(is.sparse) splognet_exp(
-      parm=alpha,x,y,offset,jd,vp,cl,ne=ne,nx,nlam,flmin,ulam,thresh,isd,intr,maxit,kopt,pb,
+      parm=alpha,x,y,offset,jd,vp,mp,cl,ne=ne,nx,nlam,flmin,ulam,thresh,isd,intr,maxit,kopt,pb,
                     lmu=integer(1),
                     a0=matrix(0.0, nc, nlam),
                     ca=double(nx*nlam*nc),
