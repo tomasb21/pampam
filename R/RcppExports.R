@@ -9,11 +9,11 @@ spelnet_exp <- function(ka, parm, x, y, w, jd, vp, cl, ne, nx, nlam, flmin, ulam
     .Call('_glmnet_spelnet_exp', PACKAGE = 'pampam', ka, parm, x, y, w, jd, vp, cl, ne, nx, nlam, flmin, ulam, thr, isd, intr, maxit, pb, lmu, a0, ca, ia, nin, rsq, alm, nlp, jerr)
 }
 
-lognet_exp <- function(parm, x, y, g, jd, vp, mp, cl, ne, nx, nlam, flmin, ulam, thr, isd, intr, maxit, kopt, pb, lmu, a0, ca, ia, nin, nulldev, dev, alm, nlp, jerr) {
+lognet_exp <- function(parm, x, y, g, jd, vp, cl, ne, nx, nlam, flmin, ulam, thr, isd, intr, maxit, kopt, pb, lmu, a0, ca, ia, nin, nulldev, dev, alm, nlp, jerr) {
     .Call('_glmnet_lognet_exp', PACKAGE = 'pampam', parm, x, y, g, jd, vp, cl, ne, nx, nlam, flmin, ulam, thr, isd, intr, maxit, kopt, pb, lmu, a0, ca, ia, nin, nulldev, dev, alm, nlp, jerr)
 }
 
-splognet_exp <- function(parm, x, y, g, jd, vp, mp, cl, ne, nx, nlam, flmin, ulam, thr, isd, intr, maxit, kopt, pb, lmu, a0, ca, ia, nin, nulldev, dev, alm, nlp, jerr) {
+splognet_exp <- function(parm, x, y, g, jd, vp, cl, ne, nx, nlam, flmin, ulam, thr, isd, intr, maxit, kopt, pb, lmu, a0, ca, ia, nin, nulldev, dev, alm, nlp, jerr) {
     .Call('_glmnet_splognet_exp', PACKAGE = 'pampam', parm, x, y, g, jd, vp, cl, ne, nx, nlam, flmin, ulam, thr, isd, intr, maxit, kopt, pb, lmu, a0, ca, ia, nin, nulldev, dev, alm, nlp, jerr)
 }
 
