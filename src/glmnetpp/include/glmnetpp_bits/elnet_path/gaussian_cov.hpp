@@ -30,6 +30,7 @@ private:
     template <class ValueType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class GType
             , class IntType
@@ -46,7 +47,7 @@ private:
     struct FitPack
     {
         using sub_pack_t = typename base_t::template FitPack<
-            ValueType, JUType, VPType, CLType, IntType,
+            ValueType, JUType, VPType, MPType, CLType, IntType,
             XType, ULamType, XVType, AOType, IAType, KinType,
             RSQOType, ALMOType, SetpbFType, IntParamType>;
         using value_t = typename sub_pack_t::value_t;
@@ -65,6 +66,7 @@ public:
     template <class ValueType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class GType
             , class IntType
@@ -82,6 +84,7 @@ public:
         ValueType beta,
         const JUType& ju,
         const VPType& vp,
+        const MPType& mp,
         const CLType& cl,
         GType& g,
         IntType ne,
@@ -108,6 +111,7 @@ public:
             ValueType
             , JUType
             , VPType
+            , MPType
             , CLType
             , GType
             , IntType
@@ -125,7 +129,7 @@ public:
             // build sub-pack
             {
                 // build sub-pack
-                {beta, ju, vp, cl, ne, nx, x, nlam, flmin,
+                {beta, ju, vp, mp, cl, ne, nx, x, nlam, flmin,
                  ulam, thr, maxit, lmu, ao, ia, kin, almo, nlp, jerr, setpb_f, int_param}, 
                 // add new members
                 xv, rsqo
@@ -148,7 +152,7 @@ public:
         auto& ssp = sp.sub_pack;
         return elnet_point_t(
                 ssp.thr, ssp.maxit, ssp.nx, ssp.nlp, ssp.ia, pack.g, ssp.x, 
-                sp.xv, ssp.vp, ssp.cl, ssp.ju);
+                sp.xv, ssp.vp, ssp.mp, ssp.cl, ssp.ju);
     }
 
     template <class FitPackType>
