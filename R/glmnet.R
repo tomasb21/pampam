@@ -347,7 +347,7 @@
 #' system.time(fit2n <- glmnet(x, y))
 #'
 #' @export glmnet
-glmnet=function(x,y,family=c("gaussian","binomial","poisson","multinomial","cox","mgaussian"),weights=NULL,offset=NULL,alpha=1.0,nlambda=100,lambda.min.ratio=ifelse(nobs<nvars,1e-2,1e-4),lambda=NULL,standardize=TRUE,intercept=TRUE,thresh=1e-7,dfmax=nvars+1,pmax=min(dfmax*2+20,nvars),exclude=NULL,penalty.factor=rep(1,nvars),lower.limits=-Inf,upper.limits=Inf,maxit=100000,type.gaussian=ifelse(nvars<500,"covariance","naive"),type.logistic=c("Newton","modified.Newton"),standardize.response=FALSE,type.multinomial=c("ungrouped","grouped"),relax=FALSE,trace.it=0,...){
+glmnet=function(x,y,family=c("gaussian","binomial","poisson","multinomial","cox","mgaussian"),weights=NULL,offset=NULL,alpha=1.0,nlambda=100,lambda.min.ratio=ifelse(nobs<nvars,1e-2,1e-4),lambda=NULL,standardize=TRUE,intercept=TRUE,thresh=1e-7,dfmax=nvars+1,pmax=min(dfmax*2+20,nvars),exclude=NULL,penalty.factor=matrix(1, nrow=nvars, ncol=nc),lower.limits=-Inf,upper.limits=Inf,maxit=100000,type.gaussian=ifelse(nvars<500,"covariance","naive"),type.logistic=c("Newton","modified.Newton"),standardize.response=FALSE,type.multinomial=c("ungrouped","grouped"),relax=FALSE,trace.it=0,...){
 
     this.call=match.call()
 ### Need to do this first so defaults in call can be satisfied
@@ -356,13 +356,23 @@ glmnet=function(x,y,family=c("gaussian","binomial","poisson","multinomial","cox"
     if(is.null(np)|(np[2]<=1))stop("x should be a matrix with 2 or more columns")
     nobs=as.integer(np[1])
     nvars=as.integer(np[2])
+    if (is.vector(y)) { #we are assuming that y is a vector or a matrix
+        nc <- as.double(length(unique(y)))
+    } else if (is.matrix(y)) {
+          if (!all(y %in% c(0, 1)) || any(rowSums(y) != 1)) {
+            stop("y should be a one-hot encoded matrix")
+          } else {
+            nc <- as.double(ncol(y))
+          }
+    }
     ##check for NAs
     if(any(is.na(x)))stop("x has missing values; consider using makeX() to impute them")
     if(is.null(weights))weights=rep(1,nobs)
     else if(length(weights)!=nobs)stop(paste("number of elements in weights (",length(weights),") not equal to the number of rows of x (",nobs,")",sep=""))
     if(is.function(exclude))exclude <- check.exclude(exclude(x=x,y=y,weights=weights),nvars)
-    if (length(penalty.factor) != nvars)
-        stop("the length of penalty.factor does not match the number of variables")
+    if (!all(dim(penalty.factor) == c(nvars, nc))) {
+        stop("penalty.factor must be of dimension (nvars x nc)")
+    }
 
 ### See whether its a call to glmnet or to glmnet.path, based on family arg
     if(!is.character(family)){
@@ -413,7 +423,8 @@ glmnet=function(x,y,family=c("gaussian","binomial","poisson","multinomial","cox"
         penalty.factor[jd]=1 #ow can change lambda sequence
         jd=as.integer(c(length(jd),jd))
       }else jd=as.integer(0)
-      vp=as.double(penalty.factor)
+      mp=penalty.factor
+      vp=as.double(penalty.factor[,1])
       internal.parms=glmnet.control()
       if(internal.parms$itrace)trace.it=1
       else{
@@ -498,8 +509,8 @@ glmnet=function(x,y,family=c("gaussian","binomial","poisson","multinomial","cox"
       fit=switch(family,
                  "gaussian"=elnet(x,is.sparse,y,weights,offset,type.gaussian,alpha,nobs,nvars,jd,vp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,intr,vnames,maxit,pb),
                  "poisson"=fishnet(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,intr,vnames,maxit,pb),
-                 "binomial"=lognet(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,intr,vnames,maxit,kopt,family,pb),
-                 "multinomial"=lognet(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,intr,vnames,maxit,kopt,family,pb),
+                 "binomial"=lognet(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,mp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,intr,vnames,maxit,kopt,family,pb),
+                 "multinomial"=lognet(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,mp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,intr,vnames,maxit,kopt,family,pb),
                  "cox"=coxnet(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,vnames,maxit),
                  "mgaussian"=mrelnet(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,jsd,intr,vnames,maxit,pb)
                  )
