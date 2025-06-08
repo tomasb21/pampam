@@ -1,5 +1,5 @@
 c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))             
-      subroutine wls(alm0,almc,alpha,m,no,ni,x,r,v,intr,ju,vp,mp,cl,nx,thr,
+      subroutine wls(alm0,almc,alpha,m,no,ni,x,r,v,intr,ju,vp,cl,nx,thr,
      *maxit,  a,aint,g,ia,iy,iz,mm,nino,rsqc,nlp,jerr)
       implicit double precision(a-h,o-z)                                
       double precision x(no,ni),r(no),a(ni),vp(ni),cl(2,ni)             
