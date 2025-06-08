@@ -30,6 +30,7 @@ private:
     template <class ValueType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class IntType
             , class XType
@@ -53,6 +54,7 @@ private:
             ValueType
             , JUType
             , VPType
+            , MPType
             , CLType
             , IntType
             , XType
@@ -84,6 +86,7 @@ public:
     template <class ValueType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class IntType
             , class XType
@@ -105,6 +108,7 @@ public:
         ValueType beta,
         const JUType& ju,
         const VPType& vp,
+        const MPType& mp,
         const CLType& cl,
         IntType ne,
         IntType nx,
@@ -139,6 +143,7 @@ public:
             ValueType
             , JUType
             , VPType
+            , MPType
             , CLType
             , IntType
             , XType
@@ -160,7 +165,7 @@ public:
             {
                 // build sub-pack
                 {
-                    beta, ju, vp, cl, ne, nx, x, nlam, flmin,
+                    beta, ju, vp, mp, cl, ne, nx, x, nlam, flmin,
                     ulam, thr, maxit, lmu, ao, ia, kin, alm, nlp, jerr, setpb_f, int_param
                 },
                 // add new members
@@ -181,7 +186,7 @@ public:
         return elnet_point_t(
                 sp.isd, sp.intr, sp.kopt, ssp.thr, ssp.maxit,
                 ssp.nx, ssp.nlp, ssp.ia, sp.g, sp.dev0, 
-                ssp.x, sp.y, sp.w, pack.xb, pack.xs, ssp.vp, ssp.cl, ssp.ju, 
+                ssp.x, sp.y, sp.w, pack.xb, pack.xs, ssp.vp, ssp.mp, ssp.cl, ssp.ju, 
                 ssp.int_param);
     }
 
