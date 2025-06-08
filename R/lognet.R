@@ -74,7 +74,7 @@ lognet=function(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,mp,cl,ne,nx,
                     jerr=integer(1)
                     )
   else lognet_exp(
-          parm=alpha,x,y,offset,jd,vp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,intr,maxit,kopt,pb,
+          parm=alpha,x,y,offset,jd,vp,mp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,intr,maxit,kopt,pb,
           lmu=integer(1),
           a0=matrix(0.0, nc, nlam),
           ca=double(nx*nlam*nc),
