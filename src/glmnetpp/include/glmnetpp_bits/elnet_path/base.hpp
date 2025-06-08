@@ -139,6 +139,7 @@ protected:
     template <class ValueType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class IntType
             , class XType
@@ -160,6 +161,7 @@ protected:
         value_t beta;
         const JUType& ju;
         const VPType& vp;
+        const MPType& mp;
         const CLType& cl;
         int_t ne;
         int_t nx;
@@ -250,6 +252,7 @@ protected:
         const auto& ulam = pack.ulam;
         const auto& ju = pack.ju;
         const auto& vp = pack.vp;
+        const auto& mp = pack.mp;
         auto alf = path_pack.alf;
         auto omb = path_pack.omb;
         auto& setpb_f = pack.setpb_f;
