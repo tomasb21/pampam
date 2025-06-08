@@ -507,12 +507,12 @@ glmnet=function(x,y,family=c("gaussian","binomial","poisson","multinomial","cox"
       kopt=as.integer(kopt)
 
       fit=switch(family,
-                 "gaussian"=elnet(x,is.sparse,y,weights,offset,type.gaussian,alpha,nobs,nvars,jd,vp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,intr,vnames,maxit,pb),
-                 "poisson"=fishnet(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,intr,vnames,maxit,pb),
+                 "gaussian"=elnet(x,is.sparse,y,weights,offset,type.gaussian,alpha,nobs,nvars,jd,vp,mp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,intr,vnames,maxit,pb),
+                 "poisson"=fishnet(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,mp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,intr,vnames,maxit,pb),
                  "binomial"=lognet(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,mp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,intr,vnames,maxit,kopt,family,pb),
                  "multinomial"=lognet(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,mp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,intr,vnames,maxit,kopt,family,pb),
-                 "cox"=coxnet(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,vnames,maxit),
-                 "mgaussian"=mrelnet(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,jsd,intr,vnames,maxit,pb)
+                 "cox"=coxnet(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,mp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,vnames,maxit),
+                 "mgaussian"=mrelnet(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,mp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,jsd,intr,vnames,maxit,pb)
                  )
       if (trace.it) {
         utils::setTxtProgressBar(pb, nlam)
