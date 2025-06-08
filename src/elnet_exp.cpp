@@ -21,6 +21,7 @@ List elnet_exp(
     Eigen::VectorXd w,          // TODO: figure out if we should allow updating (safe choice is to copy)
     const Eigen::Map<Eigen::VectorXi> jd,
     const Eigen::Map<Eigen::VectorXd> vp,
+    const Eigen::Map<Eigen::MatrixXd> mp,
     Eigen::MatrixXd cl,         // TODO: map?
     int ne,
     int nx,
@@ -47,7 +48,7 @@ List elnet_exp(
     elnet_driver_t driver;
     auto f = [&]() {
         driver.fit(
-                ka == 2, parm, x, y, w, jd, vp, cl, ne, nx, nlam, flmin,
+                ka == 2, parm, x, y, w, jd, vp, mp, cl, ne, nx, nlam, flmin,
                 ulam, thr, isd == 1, intr == 1, maxit, 
                 lmu, a0, ca, ia, nin, rsq, alm, nlp, jerr, 
                 [&](int v) {setpb_cpp(pb, v);}, ::InternalParams());
@@ -75,6 +76,7 @@ List spelnet_exp(
     Eigen::VectorXd w, // TODO: map?
     const Eigen::Map<Eigen::VectorXi> jd,
     const Eigen::Map<Eigen::VectorXd> vp,
+    const Eigen::Map<Eigen::MatrixXd> mp,
     Eigen::MatrixXd cl, // TODO: map?
     int ne,
     int nx,
@@ -101,7 +103,7 @@ List spelnet_exp(
     elnet_driver_t driver;
     auto f = [&]() {
         driver.fit(
-                ka == 2, parm, x, y, w, jd, vp, cl, ne, nx, nlam, flmin,
+                ka == 2, parm, x, y, w, jd, vp, mp, cl, ne, nx, nlam, flmin,
                 ulam, thr, isd == 1, intr == 1, maxit, 
                 lmu, a0, ca, ia, nin, rsq, alm, nlp, jerr, 
                 [&](int v) {setpb_cpp(pb, v);}, ::InternalParams());
@@ -185,6 +187,7 @@ List splognet_exp(
     Eigen::MatrixXd g,          // TODO: map? 
     const Eigen::Map<Eigen::VectorXi> jd,
     const Eigen::Map<Eigen::VectorXd> vp,
+    const Eigen::Map<Eigen::MatrixXd> mp,
     Eigen::MatrixXd cl,         // TODO: map?
     int ne,
     int nx,
@@ -213,7 +216,7 @@ List splognet_exp(
     elnet_driver_t driver;
     auto f = [&]() {
         driver.fit(
-                parm, x, y, g, jd, vp, cl, ne, nx, nlam, flmin,
+                parm, x, y, g, jd, vp, mp, cl, ne, nx, nlam, flmin,
                 ulam, thr, isd, intr, maxit, kopt,
                 lmu, a0, ca, ia, nin, nulldev, dev, alm, nlp, jerr,
                 [&](int v) {setpb_cpp(pb, v);}, ::InternalParams());
@@ -242,6 +245,7 @@ List fishnet_exp(
     const Eigen::Map<Eigen::VectorXd> w,
     const Eigen::Map<Eigen::VectorXi> jd,
     const Eigen::Map<Eigen::VectorXd> vp,
+    const Eigen::Map<Eigen::MatrixXd> mp,
     Eigen::MatrixXd cl,         // TODO: map?
     int ne,
     int nx,
@@ -269,7 +273,7 @@ List fishnet_exp(
     elnet_driver_t driver;
     auto f = [&]() {
         driver.fit(
-                parm, x, y, g, w, jd, vp, cl, ne, nx, nlam, flmin,
+                parm, x, y, g, w, jd, vp, mp, cl, ne, nx, nlam, flmin,
                 ulam, thr, isd, intr, maxit,
                 lmu, a0, ca, ia, nin, nulldev, dev, alm, nlp, jerr,
                 [&](int v) {setpb_cpp(pb, v);}, ::InternalParams());
@@ -298,6 +302,7 @@ List spfishnet_exp(
     const Eigen::Map<Eigen::VectorXd> w,
     const Eigen::Map<Eigen::VectorXi> jd,
     const Eigen::Map<Eigen::VectorXd> vp,
+    const Eigen::Map<Eigen::MatrixXd> mp,
     Eigen::MatrixXd cl,         // TODO: map?
     int ne,
     int nx,
@@ -325,7 +330,7 @@ List spfishnet_exp(
     elnet_driver_t driver;
     auto f = [&]() {
         driver.fit(
-                parm, x, y, g, w, jd, vp, cl, ne, nx, nlam, flmin,
+                parm, x, y, g, w, jd, vp, mp, cl, ne, nx, nlam, flmin,
                 ulam, thr, isd, intr, maxit,
                 lmu, a0, ca, ia, nin, nulldev, dev, alm, nlp, jerr,
                 [&](int v) {setpb_cpp(pb, v);}, ::InternalParams());
@@ -353,6 +358,7 @@ List multelnet_exp(
     Eigen::VectorXd w,          // TODO: map?
     const Eigen::Map<Eigen::VectorXi> jd,
     const Eigen::Map<Eigen::VectorXd> vp,
+    const Eigen::Map<Eigen::MatrixXd> mp,
     const Eigen::Map<Eigen::MatrixXd> cl,
     int ne,
     int nx,
@@ -380,7 +386,7 @@ List multelnet_exp(
     elnet_driver_t driver;
     auto f = [&]() {
         driver.fit(
-                parm, x, y, w, jd, vp, cl, ne, nx, nlam, flmin,
+                parm, x, y, w, jd, vp, mp, cl, ne, nx, nlam, flmin,
                 ulam, thr, isd, jsd, intr, maxit,
                 lmu, a0, ca, ia, nin, rsq, alm, nlp, jerr,
                 [&](int v) {setpb_cpp(pb, v);}, ::InternalParams());
@@ -407,6 +413,7 @@ List multspelnet_exp(
     Eigen::VectorXd w,          // TODO: map?
     const Eigen::Map<Eigen::VectorXi> jd,
     const Eigen::Map<Eigen::VectorXd> vp,
+    const Eigen::Map<Eigen::MatrixXd> mp,
     const Eigen::Map<Eigen::MatrixXd> cl,
     int ne,
     int nx,
@@ -434,7 +441,7 @@ List multspelnet_exp(
     elnet_driver_t driver;
     auto f = [&]() {
         driver.fit(
-                parm, x, y, w, jd, vp, cl, ne, nx, nlam, flmin,
+                parm, x, y, w, jd, vp, mp, cl, ne, nx, nlam, flmin,
                 ulam, thr, isd, jsd, intr, maxit,
                 lmu, a0, ca, ia, nin, rsq, alm, nlp, jerr,
                 [&](int v) {setpb_cpp(pb, v);}, ::InternalParams());
