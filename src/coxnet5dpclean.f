@@ -1,12 +1,12 @@
 c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))             
-      subroutine coxnet(parm,no,ni,x,y,d,g,w,jd,vp,mp,cl,ne,nx,nlam,flmin,u
+      subroutine coxnet(parm,no,ni,x,y,d,g,w,jd,vp,cl,ne,nx,nlam,flmin,u
      *lam,thr,  maxit,isd,lmu,ca,ia,nin,dev0,dev,alm,nlp,jerr)
       implicit double precision(a-h,o-z)                                
       double precision x(no,ni),y(no),d(no),g(no),w(no),vp(ni),ulam(nlam
      *)
       double precision ca(nx,nlam),dev(nlam),alm(nlam),cl(2,ni)         
       integer jd(*),ia(nx),nin(nlam)                                    
-      double precision, dimension (:), allocatable :: xs,ww,vq,mq        
+      double precision, dimension (:), allocatable :: xs,ww,vq       
       integer, dimension (:), allocatable :: ju                         
       if(maxval(vp) .gt. 0.0)goto 10021                                 
       jerr=10000                                                        
@@ -30,7 +30,6 @@ c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))
 10061 continue                                                          
       vq=max(0d0,vp)                                                    
       vq=vq*ni/sum(vq) 
-      mq=vq
       ww=max(0d0,w)                                                     
       sw=sum(ww)                                                        
       if(sw .gt. 0.0)goto 10081                                         
@@ -45,7 +44,7 @@ c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))
 10111 continue                                                          
       continue                                                          
 10101 continue                                                          
-      call coxnet1(parm,no,ni,x,y,d,g,ww,ju,vq,mq,cl,ne,nx,nlam,flmin,ulam,
+      call coxnet1(parm,no,ni,x,y,d,g,ww,ju,vq,cl,ne,nx,nlam,flmin,ulam,
      *thr,  isd,maxit,lmu,ca,ia,nin,dev0,dev,alm,nlp,jerr)
       if(jerr.gt.0) return                                              
       dev0=2.0*sw*dev0                                                  
@@ -56,7 +55,7 @@ c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))
 10141 continue                                                          
       continue                                                          
 10131 continue                                                          
-      deallocate(ww,ju,vq,mq)                                              
+      deallocate(ww,ju,vq)                                              
       if(isd.gt.0) deallocate(xs)                                       
       return                                                            
       end                                                               
@@ -76,7 +75,7 @@ c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))
       continue                                                          
       return                                                            
       end                                                               
-      subroutine coxnet1(parm,no,ni,x,y,d,g,q,ju,vp,mp,cl,ne,nx,nlam,flmin,
+      subroutine coxnet1(parm,no,ni,x,y,d,g,q,ju,vp,cl,ne,nx,nlam,flmin,
      *ulam,cthri,  isd,maxit,lmu,ao,m,kin,dev0,dev,alm,nlp,jerr)
       implicit double precision(a-h,o-z)                                
       double precision x(no,ni),y(no),q(no),d(no),g(no),vp(ni),ulam(nlam
