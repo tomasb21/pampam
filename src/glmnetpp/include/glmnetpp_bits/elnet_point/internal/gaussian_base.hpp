@@ -35,6 +35,7 @@ public:
     template <class IAType
             , class XVType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType>
     ElnetPointInternalGaussianBase(
@@ -45,10 +46,11 @@ public:
             IAType& ia,
             const XVType& xv,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju,
             value_t rsq = 0.0)
-        : base_t(thr, maxit, nx, nlp, ia, vp, cl, ju)
+        : base_t(thr, maxit, nx, nlp, ia, vp, mp, cl, ju)
         , rsq_(rsq)
         , xv_(xv.data(), xv.size())
     {}
@@ -119,6 +121,7 @@ protected:
     template <class IAType
             , class XVType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType>
     ElnetPointInternalGaussianUniBase(
@@ -129,9 +132,10 @@ protected:
             IAType& ia,
             const XVType& xv,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju)
-        : base_t(thr, maxit, nx, nlp, ia, xv, vp, cl, ju)
+        : base_t(thr, maxit, nx, nlp, ia, xv, vp, mp, cl, ju)
         , a_(xv.size())
     {
         a_.setZero(); 
@@ -180,6 +184,7 @@ public:
             , class GType
             , class XVType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType>
     ElnetPointInternalGaussianCovBase(
@@ -191,9 +196,10 @@ public:
             GType& g,
             const XVType& xv,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju)
-        : base_t(thr, maxit, nx, nlp, ia, xv, vp, cl, ju)
+        : base_t(thr, maxit, nx, nlp, ia, xv, vp, mp, cl, ju)
         , da_(g.size())
         , g_(g.data(), g.size())
         , c_(g.size(), nx)
@@ -317,6 +323,7 @@ public:
     template <class IAType
             , class XVType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType>
     ElnetPointInternalGaussianNaiveBase(
@@ -327,9 +334,10 @@ public:
             IAType& ia,
             const XVType& xv,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju)
-        : base_t(thr, maxit, nx, nlp, ia, xv, vp, cl, ju)
+        : base_t(thr, maxit, nx, nlp, ia, xv, vp, mp, cl, ju)
         , g_(ju.size())
         , ix_(ju.size(), false)
     {
@@ -533,6 +541,7 @@ public:
     template <class IAType
             , class XVType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType
             , class IntParamType>
@@ -546,10 +555,11 @@ public:
             value_t ys0,
             const XVType& xv,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju,
             const IntParamType& int_param)
-        : base_t(thr * ys0 / nr, maxit, nx, nlp, ia, xv, vp, cl /* actually won't be used */, ju, ys0)
+        : base_t(thr * ys0 / nr, maxit, nx, nlp, ia, xv, vp, mp, cl /* actually won't be used */, ju, ys0)
         , bnorm_thr_(int_param.bnorm_thr)
         , bnorm_mxit_(int_param.bnorm_mxit)
         , ys0_(ys0)
@@ -814,6 +824,7 @@ public:
             , class VType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class AType
             , class GType
@@ -830,6 +841,7 @@ public:
         bool intr,
         const JUType& ju,
         const VPType& vp,
+        const MPType& mp,
         const CLType& cl,
         index_t nx,
         value_t thr,
@@ -844,7 +856,7 @@ public:
         index_t& nino,
         value_t& rsqc,
         index_t& nlp)
-        : base_t(thr, maxit, nino, nx, nlp, ia, vp, cl, ju)
+        : base_t(thr, maxit, nino, nx, nlp, ia, vp, mp, cl, ju)
         , lmda_(almc)
         , prev_lmda_(alm0)
         , alpha_(alpha)
