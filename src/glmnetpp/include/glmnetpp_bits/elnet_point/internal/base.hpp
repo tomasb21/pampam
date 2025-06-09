@@ -96,6 +96,7 @@ protected:
      */
     template <class GType
             , class VPType
+            , class MPType
             , class SType
             , class SkipType>
     GLMNETPP_STRONG_INLINE
@@ -103,6 +104,7 @@ protected:
     compute_strong_map(
             const GType& g,
             const VPType& penalty,
+            const MPType& mp,
             SType& strong_map,
             value_t tlam,
             SkipType skip_f) 
@@ -126,6 +128,7 @@ protected:
      */
     template <class GType
             , class VPType
+            , class MPType
             , class SType
             , class FType
             , class SkipType>
@@ -134,6 +137,7 @@ protected:
     compute_strong_map(
             const GType& g,
             const VPType& penalty,
+            const MPType& mp,
             SType& strong_map,
             value_t tlam,
             FType f,
@@ -159,6 +163,7 @@ protected:
      */
     template <class GType
             , class VPType
+            , class MPType
             , class SType
             , class SkipType>
     GLMNETPP_STRONG_INLINE
@@ -166,6 +171,7 @@ protected:
     compute_strong_map(
             const GType& g,
             const VPType& penalty,
+            const MPType& mp,
             SType& strong_map,
             value_t beta,
             value_t lmda,
@@ -181,6 +187,7 @@ protected:
      */
     template <class GType
             , class VPType
+            , class MPType
             , class SType
             , class FType
             , class SkipType>
@@ -189,6 +196,7 @@ protected:
     compute_strong_map(
             const GType& g,
             const VPType& penalty,
+            const MPType& mp,
             SType& strong_map,
             value_t beta,
             value_t lmda,
@@ -240,6 +248,7 @@ public:
 
     template <class IAType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType>
     ElnetPointInternalBaseViewer(
@@ -250,6 +259,7 @@ public:
             index_t& nlp,
             IAType& ia,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju
             )
@@ -261,6 +271,7 @@ public:
         , nlp_(nlp)
         , ia_(ia.data(), ia.size())
         , vp_(vp.data(), vp.size())
+        , mp_(mp.data(), mp.rows(), mp.cols())
         , cl_(cl.data(), cl.rows(), cl.cols())
         , ju_(util::init_bvec<bool_t>::eval(ju))
     {}
@@ -341,6 +352,7 @@ private:
     index_t& nlp_;                      // number of passes
     Eigen::Map<ivec_t> ia_;             // active set (important that it's 1-indexed!)
     Eigen::Map<const vec_t> vp_;        // penalties on features
+    Eigen::Map<const mat_t> mp_; 
     Eigen::Map<const mat_t> cl_;        // limits on each feature (2 x nvars)
     ju_t ju_;                           // exclusion type
 };
@@ -362,6 +374,7 @@ protected:
 public:
     template <class IAType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType>
     ElnetPointInternalBase(
@@ -371,10 +384,11 @@ public:
             index_t& nlp,
             IAType& ia,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju
             )
-        : base_t(thr, maxit, nin_, nx, nlp, ia, vp, cl, ju)
+        : base_t(thr, maxit, nin_, nx, nlp, ia, vp, mp, cl, ju)
         , mm_(vp.size())
     {
         base_t::construct(mm_);
@@ -407,6 +421,7 @@ protected:
 public:
     template <class IAType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType>
     ElnetPointInternalNonLinearBase(
@@ -418,10 +433,11 @@ public:
             IAType& ia,
             value_t& dev0,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju
             )
-        : base_t(thr, maxit, nx, nlp, ia, vp, cl, ju)
+        : base_t(thr, maxit, nx, nlp, ia, vp, mp, cl, ju)
         , ga_(vp.size())
         , ixx_(vp.size(), false)
         , intr_(intr)
