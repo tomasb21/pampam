@@ -6,7 +6,7 @@ c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))
      *)
       double precision ca(nx,nlam),dev(nlam),alm(nlam),cl(2,ni)         
       integer jd(*),ia(nx),nin(nlam)                                    
-      double precision, dimension (:), allocatable :: xs,ww,vq          
+      double precision, dimension (:), allocatable :: xs,ww,vq,mq        
       integer, dimension (:), allocatable :: ju                         
       if(maxval(vp) .gt. 0.0)goto 10021                                 
       jerr=10000                                                        
@@ -29,7 +29,8 @@ c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))
       return                                                            
 10061 continue                                                          
       vq=max(0d0,vp)                                                    
-      vq=vq*ni/sum(vq)                                                  
+      vq=vq*ni/sum(vq) 
+      mq=vq
       ww=max(0d0,w)                                                     
       sw=sum(ww)                                                        
       if(sw .gt. 0.0)goto 10081                                         
@@ -44,7 +45,7 @@ c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))
 10111 continue                                                          
       continue                                                          
 10101 continue                                                          
-      call coxnet1(parm,no,ni,x,y,d,g,ww,ju,vq,cl,ne,nx,nlam,flmin,ulam,
+      call coxnet1(parm,no,ni,x,y,d,g,ww,ju,vq,mq,cl,ne,nx,nlam,flmin,ulam,
      *thr,  isd,maxit,lmu,ca,ia,nin,dev0,dev,alm,nlp,jerr)
       if(jerr.gt.0) return                                              
       dev0=2.0*sw*dev0                                                  
@@ -55,7 +56,7 @@ c     mortran 2.0     (version of 7/04/75 mod 7/4/87 (ajc))
 10141 continue                                                          
       continue                                                          
 10131 continue                                                          
-      deallocate(ww,ju,vq)                                              
+      deallocate(ww,ju,vq,mq)                                              
       if(isd.gt.0) deallocate(xs)                                       
       return                                                            
       end                                                               
