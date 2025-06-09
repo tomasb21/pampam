@@ -36,6 +36,7 @@ public:
             , class GType
             , class QType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType
             , class IntParamType
@@ -54,10 +55,11 @@ public:
             const GType& g,
             const QType& q,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju,
             const IntParamType& int_param)
-        : base_t(thr, maxit, nx, nlp, intr, ia, dev0, vp, cl, ju)
+        : base_t(thr, maxit, nx, nlp, intr, ia, dev0, vp, mp, cl, ju)
         , a_(ni)
         , as_(ni)
         , r_(no)
