@@ -35,6 +35,7 @@ public:
             , class VType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class AType
             , class GType
@@ -52,6 +53,7 @@ public:
         bool intr,
         const JUType& ju,
         const VPType& vp,
+        const MPType& mp,
         const CLType& cl,
         index_t nx,
         value_t thr,
@@ -66,7 +68,7 @@ public:
         index_t& nino,
         value_t& rsqc,
         index_t& nlp)
-        : base_t(alm0, almc, alpha, r, xv, v, intr, ju, vp, cl, nx, 
+        : base_t(alm0, almc, alpha, r, xv, v, intr, ju, vp, mp, cl, nx, 
                  thr, maxit, a, aint, g, ia, iy, iz, mm, nino, rsqc, nlp)
         , X_(x.data(), x.rows(), x.cols())
     {
