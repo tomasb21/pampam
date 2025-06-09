@@ -1,4 +1,4 @@
-coxnet=function(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,mp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,vnames,maxit){
+coxnet=function(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,cl,ne,nx,nlam,flmin,ulam,thresh,isd,vnames,maxit){
   y <- response.coxnet(y)
   if(!is.matrix(y)||!all(match(c("time","status"),dimnames(y)[[2]],0)))stop("Cox model requires a matrix with columns 'time' (>0) and 'status'  (binary) as a response; a 'Surv' object suffices",call.=FALSE)
   ty=as.double(y[,"time"])
@@ -16,7 +16,7 @@ coxnet=function(x,is.sparse,y,weights,offset,alpha,nobs,nvars,jd,vp,mp,cl,ne,nx,
   }
   fit=if(is.sparse)stop("Cox model mot implemented for sparse x in glmnet",call.=FALSE)
   else .Fortran("coxnet",
-              parm=alpha,nobs,nvars,x,ty,tevent,offset,weights,jd,vp,mp,cl,ne,nx,nlam,flmin,ulam,thresh,
+              parm=alpha,nobs,nvars,x,ty,tevent,offset,weights,jd,vp,cl,ne,nx,nlam,flmin,ulam,thresh,
               maxit,isd,# need to get JHF to reverse these
               lmu=integer(1),
               ca=double(nx*nlam),
