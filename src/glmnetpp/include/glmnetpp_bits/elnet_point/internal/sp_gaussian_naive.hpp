@@ -33,6 +33,7 @@ public:
             , class XSType
             , class XVType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType>
     SpElnetPointInternal(
@@ -48,9 +49,10 @@ public:
             const XSType& xs,
             const XVType& xv,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju)
-        : base_t(thr, maxit, nx, nlp, ia, xv, vp, cl, ju)
+        : base_t(thr, maxit, nx, nlp, ia, xv, vp, mp, cl, ju)
         , X_(X.rows(), X.cols(), X.nonZeros(), 
              X.outerIndexPtr(), X.innerIndexPtr(), 
              X.valuePtr(), X.innerNonZeroPtr())
