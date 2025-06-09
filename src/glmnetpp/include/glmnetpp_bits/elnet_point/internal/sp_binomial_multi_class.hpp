@@ -45,6 +45,7 @@ public:
             , class XBType
             , class XSType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType
             , class ISType
@@ -66,11 +67,12 @@ public:
             const XBType& xb,
             const XSType& xs,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju,
             ISType& is,
             const IntParamType& int_param)
-        : base_t(isd, intr, kopt, thr, maxit, nx, nlp, ia, g, dev0, y, w, vp, cl, ju, is, int_param)
+        : base_t(isd, intr, kopt, thr, maxit, nx, nlp, ia, g, dev0, y, w, vp, mp, cl, ju, is, int_param)
         , sp_base_t(X, xb, xs)
     {
         base_t::construct(
