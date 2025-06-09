@@ -24,6 +24,7 @@ struct FitPathPoisson
             , class WType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class IntType
             , class ULamType
@@ -46,6 +47,7 @@ struct FitPathPoisson
             const WType& w,
             const JUType& ju,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             IntType ne,
             IntType nx,
@@ -75,7 +77,7 @@ struct FitPathPoisson
         using mode_t = util::mode_type<glm>;
 
         ElnetPath<glm, mode_t::naive> elnet_path;
-        elnet_path.fit(parm,ju,vp,cl,ne,nx,x,y,g,w,nlam,flmin,ulam,
+        elnet_path.fit(parm,ju,vp,mp,cl,ne,nx,x,y,g,w,nlam,flmin,ulam,
              thr,intr,maxit,lmu,a0,ca,ia,nin,dev0,dev,alm,nlp,jerr,setpb_f, int_param);
     }
 };
@@ -90,6 +92,7 @@ struct FitPathPoisson<false>
             , class WType
             , class JUType
             , class VPType
+            , class MPType
             , class CLType
             , class IntType
             , class ULamType
@@ -112,6 +115,7 @@ struct FitPathPoisson<false>
             const WType& w,
             const JUType& ju,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             IntType ne,
             IntType nx,
@@ -141,7 +145,7 @@ struct FitPathPoisson<false>
         using mode_t = util::mode_type<glm>;
 
         SpElnetPath<glm, mode_t::naive> elnet_path;
-        elnet_path.fit(parm,ju,vp,cl,ne,nx,x,y,g,w,nlam,flmin,ulam,xm,xs,
+        elnet_path.fit(parm,ju,vp,mp,cl,ne,nx,x,y,g,w,nlam,flmin,ulam,xm,xs,
              thr,intr,maxit,lmu,a0,ca,ia,nin,dev0,dev,alm,nlp,jerr,setpb_f, int_param);
     }
 };
@@ -164,6 +168,7 @@ public:
             , class WType
             , class JDType
             , class VPType
+            , class MPType
             , class CLType
             , class ULamType
             , class IntType
@@ -184,6 +189,7 @@ public:
             const WType& w,
             const JDType& jd,
             const VPType& vp,
+            const MPType& mp,
             CLType& cl,
             IntType ne,
             IntType nx,
@@ -221,6 +227,10 @@ public:
         try {
             vec_t vq = vp;
             this->normalize_penalty(vq);
+            
+            mat_t mq = mp;
+            this->normalize_penalty(mq);
+            
             if (y.minCoeff() < 0.0) throw util::negative_response_error(); 
 
             auto no = x.rows();
@@ -253,7 +263,7 @@ public:
             }
 
             details::FitPathPoisson<do_dense>::eval(
-                    parm, x, y, g, ww, ju, vq, cl, ne, nx,
+                    parm, x, y, g, ww, ju, vq, mq, cl, ne, nx,
                     nlam, flmin, ulam, xm, xs, thr, intr, maxit,
                     lmu, a0, ca, ia, nin, dev0, dev, alm, nlp, jerr, setpb_f, int_param
                     );
