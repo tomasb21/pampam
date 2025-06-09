@@ -43,6 +43,7 @@ public:
             , class GType
             , class QType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType
             , class IntParamType>
@@ -59,10 +60,11 @@ public:
             const GType& g,
             const QType& q,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju,
             const IntParamType& int_param)
-        : base_t(intr, thr, maxit, nx, nlp, ia, X.rows(), X.cols(), dev0, y, g, q, vp, cl, ju, int_param)
+        : base_t(intr, thr, maxit, nx, nlp, ia, X.rows(), X.cols(), dev0, y, g, q, vp, mp, cl, ju, int_param)
         , X_(X.data(), X.rows(), X.cols())
         , t_(X.rows())
         , f_(X.rows())
