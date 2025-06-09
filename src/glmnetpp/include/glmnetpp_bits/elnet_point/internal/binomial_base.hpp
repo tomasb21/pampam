@@ -34,6 +34,7 @@ public:
     template <class IAType
             , class WType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType
             , class IntParamType
@@ -52,10 +53,11 @@ public:
             value_t& dev0,
             const WType& w,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju,
             const IntParamType& int_param)
-        : base_t(thr, maxit, nx, nlp, intr, ia, dev0, vp, cl, ju)
+        : base_t(thr, maxit, nx, nlp, intr, ia, dev0, vp, mp, cl, ju)
         , isd_(isd)
         , kopt_(kopt)
         , pmin_(int_param.pmin)
@@ -106,6 +108,7 @@ public:
     template <class IAType
             , class WType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType
             , class IntParamType
@@ -124,10 +127,11 @@ public:
             value_t& dev0,
             const WType& w,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju,
             const IntParamType& int_param)
-        : base_t(isd, intr, kopt, thr, maxit, nx, nlp, ia, no, ni, dev0, w, vp, cl, ju, int_param)
+        : base_t(isd, intr, kopt, thr, maxit, nx, nlp, ia, no, ni, dev0, w, vp, mp, cl, ju, int_param)
         , r_(no)
         , v_(no)
     {}
@@ -169,6 +173,7 @@ public:
             , class YType
             , class WType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType
             , class IntParamType>
@@ -186,10 +191,11 @@ public:
             const YType& y,
             const WType& w,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju,
             const IntParamType& int_param)
-        : base_t(isd, intr, kopt, thr, maxit, nx, nlp, ia, y.size(), vp.size(), dev0, w, vp, cl, ju, int_param)
+        : base_t(isd, intr, kopt, thr, maxit, nx, nlp, ia, y.size(), vp.size(), mp.size(), dev0, w, vp, mp, cl, ju, int_param)
         , b_(vp.size() + 1)
         , xv_(vp.size())
         , bs_(vp.size() + 1)
@@ -450,6 +456,7 @@ public:
             , class YType
             , class WType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType
             , class IntParamType>
@@ -467,10 +474,11 @@ public:
             const YType& y,
             const WType& w,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju,
             const IntParamType& int_param)
-        : base_t(isd, intr, kopt, thr, maxit, nx, nlp, ia, y.rows(), vp.size(), dev0, w, vp, cl, ju, int_param)
+        : base_t(isd, intr, kopt, thr, maxit, nx, nlp, ia, y.rows(), vp.size(), mp.size(), dev0, w, vp, mp, cl, ju, int_param)
         , nc_(y.cols())
         , exmx_(int_param.exmx)
         , exmn_(-exmx_)
@@ -729,6 +737,7 @@ public:
             , class YType
             , class WType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType
             , class ISType
@@ -747,11 +756,12 @@ public:
             const YType& y,
             const WType& w,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju,
             ISType& is,
             const IntParamType& int_param)
-        : base_t(isd, intr, kopt, thr, maxit, nx, nlp, ia, g, dev0, y, w, vp, cl, ju, int_param)
+        : base_t(isd, intr, kopt, thr, maxit, nx, nlp, ia, g, dev0, y, w, vp, mp, cl, ju, int_param)
         , xv_(vp.size(), y.cols())
         , di_(y.rows())
         , r_(y.rows())
@@ -1108,6 +1118,7 @@ public:
             , class WType
             , class XVType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType
             , class IntParamType>
@@ -1124,10 +1135,11 @@ public:
             const WType& w,
             const XVType& xv,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju,
             const IntParamType& int_param)
-        : base_t(true /* isd not used */, intr, 2 /* kopt not used */, thr, maxit, nx, nlp, ia, g, dev0, y, w, vp, cl, ju, int_param)
+        : base_t(true /* isd not used */, intr, 2 /* kopt not used */, thr, maxit, nx, nlp, ia, g, dev0, y, w, vp, mp, cl, ju, int_param)
         , bnorm_thr_(int_param.bnorm_thr)
         , bnorm_mxit_(int_param.bnorm_mxit)
         , eps_(int_param.eps)
