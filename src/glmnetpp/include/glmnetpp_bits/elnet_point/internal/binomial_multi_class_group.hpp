@@ -44,6 +44,7 @@ public:
             , class WType
             , class XVType
             , class VPType
+            , class MPType
             , class CLType
             , class JUType
             , class IntParamType>
@@ -61,10 +62,11 @@ public:
             const WType& w,
             const XVType& xv,
             const VPType& vp,
+            const MPType& mp,
             const CLType& cl,
             const JUType& ju,
             const IntParamType& int_param)
-        : base_t(intr, thr, maxit, nx, nlp, ia, g, dev0, y, w, xv, vp, cl, ju, int_param)
+        : base_t(intr, thr, maxit, nx, nlp, ia, g, dev0, y, w, xv, vp, mp, cl, ju, int_param)
         , X_(X.data(), X.rows(), X.cols())
     {
         base_t::construct(
