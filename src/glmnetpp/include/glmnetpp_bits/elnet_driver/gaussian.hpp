@@ -141,7 +141,7 @@ struct FitPathGaussian<false, false>
             const WType& w,
             const JUType& ju,
             const VQType& vq,
-            const MQType% mq,
+            const MQType& mq,
             const XMType& xm,
             const XSType& xs,
             const XVType& xv,
