@@ -51,7 +51,7 @@ private:
     struct FitPack
     {
         using sub_pack_t = typename base_t::template FitPack<
-            ValueType, JUType, VPType, CLType, IntType,
+            ValueType, JUType, VPType, MPType, CLType, IntType,
             XType, ULamType, XVType, AOType, IAType, KinType,
             RSQOType, ALMOType, SetpbFType, IntParamType>;
         using value_t = typename sub_pack_t::value_t;
