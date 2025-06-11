@@ -450,6 +450,7 @@ public:
      */
     template <class AbsGradType
             , class PenaltyType
+            , class MPType
             , class StrongMapType
             , class SkipFType>
     GLMNETPP_STRONG_INLINE
@@ -465,6 +466,7 @@ public:
 
     template <class AbsGradType
             , class PenaltyType
+            , class MPType
             , class StrongMapType
             , class FType
             , class SkipFType>
