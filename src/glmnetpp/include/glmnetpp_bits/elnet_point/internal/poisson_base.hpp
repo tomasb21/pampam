@@ -87,7 +87,7 @@ public:
     void initialize(const PackType& p) 
     { 
         base_t::compute_strong_map(
-                this->abs_grad(), this->penalty(), this->strong_map(),
+                this->abs_grad(), this->penalty(), this->penalty(), this->strong_map(),
                 p.beta, p.alm, p.alm0, 
                 [&](auto k) { return !this->is_excluded(k) || !this->exclusion()[k]; });
     }
