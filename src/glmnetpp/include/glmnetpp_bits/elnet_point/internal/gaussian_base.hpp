@@ -371,7 +371,7 @@ public:
     bool check_kkt(value_t ab, AbsGradFType abs_grad_f) {
         auto skip_f = [&](auto k) { return !is_excluded(k) || !this->exclusion()[k]; };
         update_abs_grad(g_, abs_grad_f, skip_f);
-        return check_kkt(g_, this->penalty(), mp, ix_, ab, skip_f);
+        return check_kkt(g_, this->penalty(), this->penalty(), ix_, ab, skip_f);
     }
 
     const auto& abs_grad() const { return g_; }
