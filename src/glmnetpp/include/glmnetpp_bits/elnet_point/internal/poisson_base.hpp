@@ -203,7 +203,7 @@ protected:
             gaussian_naive_t::update_abs_grad(
                     this->abs_grad(), [&](index_t k) { return std::abs(grad_f(k)); }, skip_f);
             bool kkt_passed = gaussian_naive_t::check_kkt(
-                    this->abs_grad(), this->penalty(), this->strong_map(),
+                    this->abs_grad(), this->penalty(), this->penalty(), this->strong_map(),
                     l1_regul, skip_f);
             if (kkt_passed) return state_t::break_;
         }
