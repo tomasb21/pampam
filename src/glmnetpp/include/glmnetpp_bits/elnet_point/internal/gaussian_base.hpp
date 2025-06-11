@@ -490,7 +490,7 @@ protected:
     void initialize_strong_set(const PointPackType& pack) 
     {
         base_t::compute_strong_map(
-                g_, this->penalty(), ix_, 
+                g_, this->penalty(), this->penalty(), ix_, 
                 pack.elastic_prop(), pack.lmda(), pack.prev_lmda(),
                 [&](auto k) { return !is_excluded(k) || !this->exclusion()[k]; }
                 );
@@ -610,7 +610,7 @@ public:
     void initialize(const PointPackType& pack) {
         base_t::initialize();
         base_t::compute_strong_map(
-                g_, this->penalty(), ix_, pack.elastic_prop(), pack.lmda(), pack.prev_lmda(),
+                g_, this->penalty(), this->penalty(), ix_, pack.elastic_prop(), pack.lmda(), pack.prev_lmda(),
                 [&](index_t k) { return !is_excluded(k) || !this->exclusion()[k]; });
     }
 
@@ -912,7 +912,7 @@ protected:
     GLMNETPP_STRONG_INLINE
     void initialize(ComputeXVFType compute_xv_f) {
         base_t::compute_strong_map(
-                abs_grad(), this->penalty(), strong_map(), alpha_, lmda_, prev_lmda_, 
+                abs_grad(), this->penalty(), this->penalty(), strong_map(), alpha_, lmda_, prev_lmda_, 
                 [&](index_t j) { xv_(j) = compute_xv_f(j); },
                 [&](index_t j) { return !is_excluded(j) || !this->exclusion()[j]; });
     }
