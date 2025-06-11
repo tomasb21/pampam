@@ -684,7 +684,7 @@ protected:
         auto skip_f = [&](auto k) { return !is_excluded(k) || !this->exclusion()[k]; };
         gaussian_naive_t::update_abs_grad(g_, 
                 [&](index_t j) { return abs_grad_f(j, g_curr_); }, skip_f);
-        return gaussian_naive_t::check_kkt(g_, this->penalty(), ix_, ab, skip_f);
+        return gaussian_naive_t::check_kkt(g_, this->penalty(), this->penalty(), ix_, ab, skip_f);
     }
 
 private:
@@ -926,7 +926,7 @@ protected:
     bool check_kkt(XVFType xv_f, AbsGradFType abs_grad_f) {
         auto skip_f = [&](index_t k) { return !is_excluded(k) || !this->exclusion()[k]; };
         gaussian_naive_t::update_abs_grad(g_, abs_grad_f, skip_f);
-        return gaussian_naive_t::check_kkt(g_, this->penalty(), ix_, l1_regul_, 
+        return gaussian_naive_t::check_kkt(g_, this->penalty(), this->penalty(), ix_, l1_regul_, 
                 [&](index_t j) { xv_(j) = xv_f(j); }, skip_f);
     }
 
