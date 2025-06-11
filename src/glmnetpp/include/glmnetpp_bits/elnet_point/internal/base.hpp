@@ -205,7 +205,7 @@ protected:
             SkipType skip_f) 
     {
         auto tlam = beta * (2.0 * lmda - prev_lmda);
-        return compute_strong_map(g, penalty, strong_map, tlam, f, skip_f);
+        return compute_strong_map(g, penalty, mp, strong_map, tlam, f, skip_f);
     }
 
     template <class RType, class XType>
