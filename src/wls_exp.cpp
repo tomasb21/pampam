@@ -22,6 +22,7 @@ List wls_exp(
     int intr,
     const Eigen::Map<Eigen::VectorXi> ju,
     const Eigen::Map<Eigen::VectorXd> vp,
+    const Eigen::Map<Eigen::MatrixXd> mp,
     const Eigen::Map<Eigen::MatrixXd> cl,
     int nx,
     double thr,
@@ -49,7 +50,7 @@ List wls_exp(
         internal_t>;
     auto f = [&]() {
         elnet_point_t elnet_point(
-                alm0, almc, alpha, x, r, xv, v, intr, ju, vp,
+                alm0, almc, alpha, x, r, xv, v, intr, ju, vp, mp,
                 cl, nx, thr, maxit, a, aint, g, 
                 ia, iy, iz, mm, nino, rsqc, nlp);
         elnet_point.fit(m, jerr);
@@ -62,6 +63,7 @@ List wls_exp(
             Named("xv")=xv,
             Named("ju")=ju,
             Named("vp")=vp,
+            Named("mp")=mp,
             Named("cl")=cl,
             Named("nx")=nx,
             Named("a")=a,
@@ -95,6 +97,7 @@ List spwls_exp(
     int intr,
     const Eigen::Map<Eigen::VectorXi> ju,
     const Eigen::Map<Eigen::VectorXd> vp,
+    const Eigen::Map<Eigen::MatrixXd> mp,
     const Eigen::Map<Eigen::MatrixXd> cl,
     int nx,
     double thr,
@@ -122,7 +125,7 @@ List spwls_exp(
         internal_t>;
     auto f = [&]() {
         elnet_point_t elnet_point(
-                alm0, almc, alpha, x, r, xm, xs, xv, v, intr, ju, vp,
+                alm0, almc, alpha, x, r, xm, xs, xv, v, intr, ju, vp, mp,
                 cl, nx, thr, maxit, a, aint, g, 
                 ia, iy, iz, mm, nino, rsqc, nlp);
         elnet_point.fit(m, jerr);
@@ -135,6 +138,7 @@ List spwls_exp(
             Named("xv")=xv,
             Named("ju")=ju,
             Named("vp")=vp,
+            Named("mp")=mp,
             Named("cl")=cl,
             Named("nx")=nx,
             Named("a")=a,
