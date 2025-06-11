@@ -216,6 +216,7 @@ public:
     {
         using value_t = ValueType;
         using vec_t = Eigen::Matrix<value_t, Eigen::Dynamic, 1>;
+        using mat_t = Eigen::Matrix<value_t, Eigen::Dynamic, Eigen::Dynamic>;
         using bvec_t = std::vector<bool>;
         using x_t = std::decay_t<XType>;
         constexpr bool do_dense = util::is_dense<x_t>::value;
