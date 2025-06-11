@@ -195,7 +195,7 @@ public:
             const CLType& cl,
             const JUType& ju,
             const IntParamType& int_param)
-        : base_t(isd, intr, kopt, thr, maxit, nx, nlp, ia, y.size(), vp.size(), mp.size(), dev0, w, vp, mp, cl, ju, int_param)
+        : base_t(isd, intr, kopt, thr, maxit, nx, nlp, ia, y.size(), vp.size(), dev0, w, vp, mp, cl, ju, int_param)
         , b_(vp.size() + 1)
         , xv_(vp.size())
         , bs_(vp.size() + 1)
