@@ -456,10 +456,11 @@ public:
     static bool check_kkt(
             AbsGradType&& abs_grad,
             const PenaltyType& penalty,
+            const MPType & mp,
             StrongMapType&& strong_map,
             value_t l1_regul,
             SkipFType skip_f) {
-        return !base_t::compute_strong_map(abs_grad, penalty, strong_map, l1_regul, skip_f);
+        return !base_t::compute_strong_map(abs_grad, penalty, mp, strong_map, l1_regul, skip_f);
     }
 
     template <class AbsGradType
