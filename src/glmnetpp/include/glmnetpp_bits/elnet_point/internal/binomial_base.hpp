@@ -211,7 +211,7 @@ public:
     void initialize(const PackType& p) 
     { 
         base_t::compute_strong_map(
-                this->abs_grad(), this->penalty(), this->penalty(), this->strong_map(),
+                this->abs_grad(), this->penalty_matrix(), this->penalty_matrix(), this->strong_map(),
                 p.elastic_prop(), p.lmda(), p.prev_lmda(), 
                 [&](auto k) { return this->strong_map()[k] || !this->exclusion()[k]; });
     }
@@ -632,7 +632,7 @@ protected:
     bool update_strong_map(value_t l1_regul)
     {
         return base_t::compute_strong_map(
-            this->abs_grad(), this->penalty(), this->penalty(), this->strong_map(), l1_regul,
+            this->abs_grad(), this->penalty_matrix(), this->penalty_matrix(), this->strong_map(), l1_regul,
             [&](auto k) { return this->strong_map()[k] || !this->exclusion()[k]; });
     }
 
@@ -825,12 +825,13 @@ protected:
     }
 
     GLMNETPP_STRONG_INLINE
-    void update_beta(index_t k, value_t gk, value_t l1_regul, value_t l2_regul) {
+    void update_beta(index_t k, index_t ic, value_t gk, value_t l1_regul, value_t l2_regul) {
         const auto& cl = this->endpts();
         base_t::update_beta(
-                beta(k), gk, xv_ic_(k), this->penalty()(k),
-                cl(0,k), cl(1,k), l1_regul, l2_regul);
+            beta(k), gk, xv_ic_(k), this->penalty_matrix()(k, ic),
+            cl(0,k), cl(1,k), l1_regul, l2_regul);
     }
+
 
     GLMNETPP_STRONG_INLINE
     state_t setup_wls(size_t ic) {
