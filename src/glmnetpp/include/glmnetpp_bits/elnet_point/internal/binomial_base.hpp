@@ -211,7 +211,7 @@ public:
     void initialize(const PackType& p) 
     { 
         base_t::compute_strong_map(
-                this->abs_grad(), this->penalty(), this->penalty(), this->strong_map(),
+                this->abs_grad(), this->penalty_matrix(), this->penalty_matrix(), this->strong_map(),
                 p.elastic_prop(), p.lmda(), p.prev_lmda(), 
                 [&](auto k) { return this->strong_map()[k] || !this->exclusion()[k]; });
     }
@@ -240,10 +240,10 @@ protected:
     GLMNETPP_STRONG_INLINE value_t& intercept() { return b_(0); }
 
     GLMNETPP_STRONG_INLINE
-    void update_beta(index_t k, value_t gk, value_t l1_regul, value_t l2_regul) {
+    void update_beta(index_t k, index_t ic, value_t gk, value_t l1_regul, value_t l2_regul) {
         const auto& cl = this->endpts();
         base_t::update_beta(
-                beta(k), gk, xv_(k), this->penalty()(k),
+                beta(k), gk, xv_(k), this->penalty_matrix()(k, ic),
                 cl(0,k), cl(1,k), l1_regul, l2_regul);
     }
 
@@ -1196,8 +1196,8 @@ protected:
 
     template <class ComputeGradFType>
     GLMNETPP_STRONG_INLINE
-    void update_beta(index_t k, const ComputeGradFType& compute_grad_f) {
-        gaussian_multi_t::update_beta(k, beta(k), xv_(k), this->penalty()(k),
+    void update_beta(index_t k, index_t ic, const ComputeGradFType& compute_grad_f) {
+        gaussian_multi_t::update_beta(k, beta(k), xv_(k), this->penalty_matrix()(k, ic),
                 g_next_, g_next_, l1_regul_scaled_, l2_regul_scaled_, 
                 bnorm_thr_, bnorm_mxit_, isc_, 
                 [&](auto i, auto) { return this->endpts()(i,k); },
