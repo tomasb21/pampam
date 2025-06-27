@@ -111,10 +111,10 @@ protected:
     GLMNETPP_STRONG_INLINE auto max_link() const { return fmax_; }
 
     GLMNETPP_STRONG_INLINE
-    void update_beta(index_t k, value_t gk, value_t l1_regul, value_t l2_regul) {
+    void update_beta(index_t k, index_t ic, value_t gk, value_t l1_regul, value_t l2_regul) {
         const auto& cl = this->endpts();
         base_t::update_beta(
-                beta(k), gk, v_(k), this->penalty()(k),
+                beta(k, ic), gk, v_(k), this->penalty_matrix()(k, ic),
                 cl(0,k), cl(1,k), l1_regul, l2_regul);
     }
 
