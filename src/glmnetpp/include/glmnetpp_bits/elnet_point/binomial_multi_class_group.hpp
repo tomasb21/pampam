@@ -31,7 +31,7 @@ public:
     void update(index_t k, const PointConfigPack& pack)
     {
         auto&& diff = this->beta_buffer();
-        base_t::template update<upd>(k, pack, diff);
+        base_t::template update<upd>(k, ic, pack, diff);
     }
 };
 
