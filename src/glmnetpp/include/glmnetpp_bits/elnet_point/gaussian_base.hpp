@@ -59,7 +59,7 @@ protected:
     GLMNETPP_STRONG_INLINE
     state_t update(index_t k, const PointPackType& pack, DiffType&& diff)
     {
-        state_t state = base_t::template update<upd>(k, pack, diff);
+        state_t state = base_t::template update<upd>(k, ic, pack, diff);
         if (state == state_t::continue_) return state_t::continue_;
         this->update_rsq(k, diff);
         return state_t::noop_;
