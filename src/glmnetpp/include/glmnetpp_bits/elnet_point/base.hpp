@@ -67,7 +67,7 @@ protected:
 
     template <update_t upd, class PointPackType, class DiffType>
     GLMNETPP_STRONG_INLINE
-    state_t update(index_t k, const PointPackType& pack, DiffType&& diff)
+    state_t update(index_t k, index_t ic, const PointPackType& pack, DiffType&& diff)
     {
         diff = this->beta(k);           // save old beta_k
         this->update_beta(k, ic, pack);     // update new beta_k (assumes diff doesn't change)
