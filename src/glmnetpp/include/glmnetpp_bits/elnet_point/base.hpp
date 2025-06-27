@@ -40,7 +40,7 @@ protected:
                     this->for_each_with_skip(
                         this->all_begin(),
                         this->all_end(), 
-                        [=, &pack](auto k) { this->self().template update<update_t::full>(k, ic, pack); },
+                        [=, &pack, &ic](auto k) { this->self().template update<update_t::full>(k, ic, pack); },
                         [=](auto k) { return this->is_excluded(k); }
                     );
                 },
@@ -48,7 +48,7 @@ protected:
                     this->for_each_with_skip(
                         this->active_begin(),
                         this->active_end(),
-                        [=, &pack](auto k) { this->self().template update<update_t::partial>(k, ic, pack); },
+                        [=, &pack, &ic](auto k) { this->self().template update<update_t::partial>(k, ic, pack); },
                         [](auto) { return false; } // no skip
                         );
                 });
