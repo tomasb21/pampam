@@ -36,19 +36,19 @@ protected:
         this->increment_passes(); 
         this->coord_desc_reset();
         util::if_else<upd == update_t::full>(
-                [this, &pack, &ic]() {
+                [this, &pack]() {
                     this->for_each_with_skip(
                         this->all_begin(),
                         this->all_end(), 
-                        [=, &pack, &ic](auto k) { this->self().template update<update_t::full>(k, ic, pack); },
+                        [=, &pack](auto k) { this->self().template update<update_t::full>(k, ic, pack); },
                         [=](auto k) { return this->is_excluded(k); }
                     );
                 },
-                [this, &pack, &ic]() {
+                [this, &pack]() {
                     this->for_each_with_skip(
                         this->active_begin(),
                         this->active_end(),
-                        [=, &pack, &ic](auto k) { this->self().template update<update_t::partial>(k, ic, pack); },
+                        [=, &pack](auto k) { this->self().template update<update_t::partial>(k, ic, pack); },
                         [](auto) { return false; } // no skip
                         );
                 });
