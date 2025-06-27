@@ -100,8 +100,8 @@ public:
 
     template <class PointPackType>
     GLMNETPP_STRONG_INLINE
-    void update_beta(index_t k, const PointPackType&) {
-        base_t::update_beta(k, [&](index_t k, auto& buff) { compute_grad(k, buff); });
+    void update_beta(index_t k, index_t ic, const PointPackType&) {
+        base_t::update_beta(k, ic, [&](index_t k, auto& buff) { compute_grad(k, buff); });
     }
 
     template <class PointPackType>
