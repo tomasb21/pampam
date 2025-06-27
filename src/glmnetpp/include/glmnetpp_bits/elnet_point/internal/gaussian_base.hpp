@@ -142,10 +142,10 @@ protected:
     }
 
     GLMNETPP_STRONG_INLINE
-    void update_beta(index_t k, value_t ab, value_t dem, value_t gk) {
+    void update_beta(index_t k, index_t ic, value_t ab, value_t dem, value_t gk) {
         const auto& cl = this->endpts();
         base_t::update_beta(
-                a_(k), gk, this->x_var(k), this->penalty()(k),
+                a_(k, ic), ic, gk, this->x_var(k), this->penalty_matrix()(k, ic),
                 cl(0,k), cl(1,k), ab, dem);
     }
 
@@ -222,8 +222,8 @@ public:
 
     template <class PointPackType>
     GLMNETPP_STRONG_INLINE
-    void update_beta(index_t k, const PointPackType& pack) {
-        base_t::update_beta(k, pack.ab, pack.dem, g_(k));
+    void update_beta(index_t k, index_t ic, const PointPackType& pack) {
+        base_t::update_beta(k, ic, pack.ab, pack.dem, g_(k));
     }
 
     GLMNETPP_STRONG_INLINE
@@ -484,9 +484,9 @@ public:
 
 protected:
     GLMNETPP_STRONG_INLINE
-    void update_beta(index_t k, value_t ab, value_t dem, value_t gk) {
+    void update_beta(index_t k, index_t ic, value_t ab, value_t dem, value_t gk) {
         gk_cache_ = gk; 
-        base_t::update_beta(k, ab, dem, gk_cache_);
+        base_t::update_beta(k, ic, ab, dem, gk_cache_);
     }
 
     template <class PointPackType>
@@ -622,13 +622,14 @@ public:
     GLMNETPP_STRONG_INLINE
     void update_beta(
             index_t k, 
+            index_t ic,
             value_t l1_regul, 
             value_t l2_regul, 
             GradFType grad_f)
     {
         Eigen::Map<const mat_t> cl_slice(
                 cl_.data() + k * 2 * nr_, 2, nr_);
-        update_beta(k, a_.col(k), this->x_var(k), this->penalty()(k),
+        update_beta(k, ic, a_(k, ic), this->x_var(k), this->penalty_matrix()(k, ic),
                 g_curr_, g_next_, l1_regul, l2_regul, bnorm_thr_, bnorm_mxit_,
                 isc_, cl_slice, grad_f);
     }
@@ -644,6 +645,7 @@ public:
     GLMNETPP_STRONG_INLINE
     static void update_beta(
             index_t k, 
+            index_t ic,
             AType&& ak,
             value_t xvk,
             value_t vpk,
@@ -931,11 +933,11 @@ protected:
     }
 
     GLMNETPP_STRONG_INLINE
-    void update_beta(index_t k, value_t gk) {
+    void update_beta(index_t k, index_t ic, value_t gk) {
         gk_ = gk;
         const auto& cl = this->endpts();
         base_t::update_beta(
-                a_(k), gk_, xv_(k), this->penalty()(k), 
+                a_(k, ic), ic, gk_, xv_(k), this->penalty_matrix()(k, ic), 
                 cl(0,k), cl(1,k), l1_regul_, l2_regul_);
     }
 
