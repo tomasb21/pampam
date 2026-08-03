@@ -25,3 +25,13 @@ LinkingTo: RcppEigen, Rcpp
 NeedsCompilation: yes
 Maintainer: Tomás Bandeira <tomasb330@gmail.com>
 Config/roxygen2/version: 8.0.0
+Packaged: 2026-08-03 10:37:57 UTC; Tomás Bandeira
+Author: Tomás Bandeira [aut, cre],
+  Jerome Friedman [aut, cph],
+  Trevor Hastie [aut, cph],
+  Rob Tibshirani [aut, cph],
+  Balasubramanian Narasimhan [aut, cph],
+  Kenneth Tay [aut, cph],
+  Noah Simon [aut, cph],
+  Junyang Qian [ctb, cph],
+  James Yang [aut, cph]
