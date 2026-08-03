@@ -1,0 +1,27 @@
+Package: pampam
+Type: Package
+Title: Modified 'glmnet' for Penalized Adaptive Multinomial Regression
+Version: 0.1.0
+Authors@R: c(
+    person("Tomás", "Bandeira", email = "tomasb330@gmail.com", role = c("aut", "cre")),
+    person("Jerome", "Friedman", role = c("aut", "cph")),
+    person("Trevor", "Hastie", role = c("aut", "cph")),
+    person("Rob", "Tibshirani", role = c("aut", "cph")),
+    person("Balasubramanian", "Narasimhan", role = c("aut", "cph")),
+    person("Kenneth", "Tay", role = c("aut", "cph")),
+    person("Noah", "Simon", role = c("aut", "cph")),
+    person("Junyang", "Qian", role = c("ctb", "cph")),
+    person("James", "Yang", role = c("aut", "cph")))
+Depends: R (>= 3.6.0), Matrix (>= 1.0-6)
+Imports: methods, utils, foreach, shape, survival, Rcpp
+Suggests: knitr, lars, testthat, xfun, rmarkdown
+BugReports: https://github.com/tomasb21/pampam/issues
+SystemRequirements: C++17
+Description: A modified version of the 'glmnet' package implementing penalized adaptive multinomial regression. This package extends the original functionality by modifying how the 'penalty.factor' argument is defined and used in the underlying optimization routines.
+License: GPL-2
+Encoding: UTF-8
+URL: https://github.com/tomasb21/pampam
+LinkingTo: RcppEigen, Rcpp
+NeedsCompilation: yes
+Maintainer: Tomás Bandeira <tomasb330@gmail.com>
+Config/roxygen2/version: 8.0.0
